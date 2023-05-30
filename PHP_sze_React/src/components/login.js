@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import "../styles/login.css";
 import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
 
@@ -25,7 +26,7 @@ export default function Login() {
           className="ui one column center aligned grid"
           style={{ margin: "10px" }}
         >
-          <a onClick={handleRegisterClick}>Van már fiókod?</a>
+          <a onClick={handleRegisterClick}>Nincs még fiókod?</a>
         </div>
         <div className="field">
           <div className="ui one column center aligned grid">
@@ -43,7 +44,7 @@ export default function Login() {
     </div>
   ) : (
     <div className="login-container">
-      <h2 className="ui dividing header">Regisztrálj!</h2>
+      <h2 className="ui dividing header">Regisztrálj be!</h2>
       <form className="ui form">
         <div className="field" style={{ marginTop: "30px" }}>
           <label>Felhasználónév</label>
@@ -51,7 +52,11 @@ export default function Login() {
         </div>
         <div className="field">
           <label>Jelszó</label>
-          <input type="password" name="last-name" placeholder="Jelszó" />
+          <input type="password" name="password" placeholder="Jelszó" />
+        </div>
+        <div className="field">
+          <label>Jelszó ismétlése</label>
+          <input type="password" name="password" placeholder="Jelszó" />
         </div>
         <div
           className="ui one column center aligned grid"
