@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios"
 
 import "../styles/login.css";
 import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
@@ -21,6 +22,7 @@ const handleChange = (event) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    axios.post('http://localhost:80/PHP_csapatkereso/PHP_Csapatkereso/PHP_sze/api/index.php', inputs);
     console.log(inputs);
   }
 
