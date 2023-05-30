@@ -22,7 +22,7 @@ const handleChange = (event) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.post('http://localhost:80/PHP_csapatkereso/PHP_Csapatkereso/PHP_sze/api/index.php', inputs);
+    axios.post('http://localhost/PHP_csapatkereso/PHP_Csapatkereso/PHP_sze/api/index.php', inputs);
     console.log(inputs);
   }
 
