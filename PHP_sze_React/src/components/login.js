@@ -10,17 +10,31 @@ export default function Login() {
     setIsRegister(true);
   };
 
+  const [inputs, setInputs] = useState({})
+
+const handleChange = (event) => {
+  const name = event.target.name;
+  const value = event.target.value;
+  setInputs(values => ({...values, [name]: value}));
+}
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    console.log(inputs);
+  }
+
   return !isRegister ? (
     <div className="login-container">
       <h2 className="ui dividing header">Jelentkezz be!</h2>
-      <form className="ui form">
+      <form className="ui form" onSubmit={handleSubmit}>
         <div className="field" style={{ marginTop: "30px" }}>
           <label>Felhasználónév</label>
-          <input type="text" name="username" placeholder="Felhasználónév" />
+          <input type="text" name="username" placeholder="Felhasználónév" onChange={handleChange}/>
         </div>
         <div className="field">
           <label>Jelszó</label>
-          <input type="password" name="last-name" placeholder="Jelszó" />
+          <input type="password" name="password" placeholder="Jelszó" onChange={handleChange}/>
         </div>
         <div
           className="ui one column center aligned grid"
@@ -48,15 +62,15 @@ export default function Login() {
       <form className="ui form">
         <div className="field" style={{ marginTop: "30px" }}>
           <label>Felhasználónév</label>
-          <input type="text" name="username" placeholder="Felhasználónév" />
+          <input type="text" name="username" placeholder="Felhasználónév" onChange={handleChange}/>
         </div>
         <div className="field">
           <label>Jelszó</label>
-          <input type="password" name="password" placeholder="Jelszó" />
+          <input type="password" name="password" placeholder="Jelszó" onChange={handleChange}/>
         </div>
         <div className="field">
           <label>Jelszó ismétlése</label>
-          <input type="password" name="password" placeholder="Jelszó" />
+          <input type="password" name="password" placeholder="Jelszó" onChange={handleChange}/>
         </div>
         <div
           className="ui one column center aligned grid"
