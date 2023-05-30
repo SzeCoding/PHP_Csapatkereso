@@ -1,5 +1,9 @@
 <?php
 
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Headers: *");
+
+
 function emptyInputSignup($name, $pass, $passrepeat){
     $result = false;
     if (empty($name) || empty($pass) || empty($passrepeat)){
