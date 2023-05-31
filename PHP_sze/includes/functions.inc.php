@@ -37,7 +37,7 @@ function uExists($dbc, $name){
     $sql = "SELECT * FROM users WHERE userName = ?;";
     $stmt = mysqli_stmt_init($dbc);
     if (!mysqli_stmt_prepare($stmt,$sql)){
-        header("location: ../signup.php?error=stmtfailed");
+        header("location: signup.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "s", $name);
@@ -58,7 +58,7 @@ function createUser($dbc, $name, $pass){
     $sql = "INSERT INTO users (userName,userPass) VALUES(?,?);";
     $stmt = mysqli_stmt_init($dbc);
     if (!mysqli_stmt_prepare($stmt,$sql)){
-        header("location: ../signup.php?error=stmtfailed");
+        header("location: signup.php?error=stmtfailed");
         exit();
     }
 
@@ -68,7 +68,6 @@ function createUser($dbc, $name, $pass){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    header("location: signup.php?error=none");
     exit();
 }
 
