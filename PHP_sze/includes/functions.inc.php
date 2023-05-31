@@ -83,6 +83,7 @@ function loginUser($dbc,$name,$pass){
 
     if ($checkPass===false){
         header("location: ../api/login.php?error=wrongpass");
+        echo "Login failed";
         exit();
     }else if ($checkPass === true){
         session_start();
