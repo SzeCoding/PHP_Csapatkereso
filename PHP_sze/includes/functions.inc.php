@@ -76,7 +76,7 @@ function loginUser($dbc,$name,$pass){
     $userExists = uExists($dbc, $name);
 
     if ($userExists===false){
-        header("location: ogin.php?error=usernotfound");
+        header("location: login.php?error=usernotfound");
         exit();
     }
 
