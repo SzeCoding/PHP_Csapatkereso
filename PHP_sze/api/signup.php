@@ -15,6 +15,9 @@
             if (emptyInputSignup($name, $pass, $passrepeat) !== false){
                 header("location: signup.php?error=emptyinput");
                 exit();
+            }if (invalidUname($name) !== false){
+                header("location: ../signup.php?error=invalidusername");
+                exit();
             }if (passdMatch($pass, $passrepeat) !== false){
                 header("location: signup.php?error=passwordsdontmatch");
                 exit();
