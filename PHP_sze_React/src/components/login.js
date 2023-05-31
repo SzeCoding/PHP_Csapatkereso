@@ -55,7 +55,6 @@ const handleChange = (event) => {
             <div>
               <input
                 type="submit"
-                name="submit"
                 className="ui primary button"
                 style={{ marginTop: "15px" }}
                 value={"Bejelentkezés"}

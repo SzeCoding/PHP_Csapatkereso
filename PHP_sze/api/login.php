@@ -1,13 +1,15 @@
 <?php
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: *");
-    echo "Test";
 
     include '../includes/connect.inc.php';
-    var_dump($dbc);
+    include '../includes/functions.inc.php';
 
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
         case "POST":
-            
+            $user = json_decode(file_get_contents('php://input'), true);
+            $name = $user['username'];
+            $pass = $user['password'];
+            loginUser($dbc, $name, $pass);
     }

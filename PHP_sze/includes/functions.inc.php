@@ -58,7 +58,7 @@ function createUser($dbc, $name, $pass){
     $sql = "INSERT INTO users (userName,userPass) VALUES(?,?);";
     $stmt = mysqli_stmt_init($dbc);
     if (!mysqli_stmt_prepare($stmt,$sql)){
-        header("location: signup.php?error=stmtfailed");
+        header("location: ../api/signup.php?error=stmtfailed");
         exit();
     }
 
@@ -75,20 +75,20 @@ function loginUser($dbc,$name,$pass){
     $userExists = uExists($dbc, $name);
 
     if ($userExists===false){
-        header("location: login.php?error=usernotfound");
+        header("location: ../api/login.php?error=usernotfound");
         exit();
     }
 
     $checkPass = password_verify($pass,$userExists["userPass"]);
 
     if ($checkPass===false){
-        header("location: login.php?error=wrongpass");
+        header("location: ../api/login.php?error=wrongpass");
         exit();
     }else if ($checkPass === true){
         session_start();
         $_SESSION["userid"] = $userExists["userId"];
         $_SESSION["username"] = $userExists["userName"];
-        header("location: ../index.php");
+        echo "Login successful";
         exit();
     }
 }
