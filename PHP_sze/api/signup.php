@@ -6,8 +6,7 @@
     include '../includes/functions.inc.php';
 
     $method = $_SERVER['REQUEST_METHOD'];
-    switch($method){
-        case "POST":
+    if($method == 'POST'){
             $user = json_decode(file_get_contents('php://input'), true);
             $name = $user['username'];
             $pass = $user['password'];

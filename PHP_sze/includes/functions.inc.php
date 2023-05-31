@@ -68,7 +68,7 @@ function createUser($dbc, $name, $pass){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    header("location: ../signup.php?error=none");
+    header("location: signup.php?error=none");
     exit();
 }
 
@@ -76,14 +76,14 @@ function loginUser($dbc,$name,$pass){
     $userExists = uExists($dbc, $name);
 
     if ($userExists===false){
-        header("location: ../login.php?error=usernotfound");
+        header("location: ogin.php?error=usernotfound");
         exit();
     }
 
     $checkPass = password_verify($pass,$userExists["userPass"]);
 
     if ($checkPass===false){
-        header("location: ../login.php?error=wrongpass");
+        header("location: login.php?error=wrongpass");
         exit();
     }else if ($checkPass === true){
         session_start();
