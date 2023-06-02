@@ -45,8 +45,11 @@ export default function Login() {
     axios.post(
       "http://localhost/PHP_Csapatkereso/PHP_sze/api/signup.php",
       inputs
-      );
-      setShouldNavigate(true);
+      ).then(function (response){
+
+        setShouldNavigate(true);
+      });
+      
   };
 
   return shouldNavigate ? (

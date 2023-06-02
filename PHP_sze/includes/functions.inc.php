@@ -105,6 +105,5 @@ function loginUser($dbc,$name,$pass){
         $_SESSION["userid"] = $userExists["userId"];
         $_SESSION["username"] = $userExists["userName"];
         echo "Login successful";
-        exit();
     }
 }
