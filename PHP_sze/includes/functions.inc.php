@@ -73,17 +73,34 @@ function loginUser($dbc,$name,$pass){
     $userExists = uExists($dbc, $name);
 
     if ($userExists===false){
-        header("location: ../api/login.php?error=usernotfound");
+        http_response_code(404);
+        $response = array(
+            'error' => true,
+            'message' => "User not found in database"
+        );
+        echo "User not found in database";
+        $jsonResponse = json_encode($response);
+        header("Content-Type: application/json");
         exit();
     }
 
     $checkPass = password_verify($pass,$userExists["userPass"]);
 
     if ($checkPass===false){
-        header("location: ../api/login.php?error=wrongpass");
-        echo "Login failed";
+        http_response_code(404);
+        $response = array(
+            'error' => true,
+            'message' => "Wrong password"
+        );
+        echo "Wrong password";
+        $jsonResponse = json_encode($response);
+        header("Content-Type: application/json");
         exit();
     }else if ($checkPass === true){
+        $response = array(
+            'error' => false,
+            'message' => "Login successful"
+        );
         session_start();
         $_SESSION["userid"] = $userExists["userId"];
         $_SESSION["username"] = $userExists["userName"];

@@ -31,9 +31,12 @@ export default function Login() {
       )
       .then(function (response) {
         console.log(inputs);
+        setShouldNavigate(true);
+      }).catch(function (error){
+        console.log(error.message);
+        setShouldNavigate(false);
       });
 
-    setShouldNavigate(true);
   };
 
   const handleSignup = (event) => {
@@ -42,8 +45,8 @@ export default function Login() {
     axios.post(
       "http://localhost/PHP_Csapatkereso/PHP_sze/api/signup.php",
       inputs
-    );
-    setShouldNavigate(true);
+      );
+      setShouldNavigate(true);
   };
 
   return shouldNavigate ? (
