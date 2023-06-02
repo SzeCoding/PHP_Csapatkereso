@@ -1,6 +1,7 @@
 <?php
 require_once 'functions.inc.php';
 require_once 'connect.inc.php';
+header('Access-Control-Allow-Origin: http://localhost:3000');
 
 if(isset($_POST["submit"])){
     $name = $_POST["name"];

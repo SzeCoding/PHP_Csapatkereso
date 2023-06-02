@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import {useNavigate} from "react-router-dom";
-import axios from "axios"
+import { Navigate } from "react-router-dom";
+import axios from "axios";
 
 import "../styles/login.css";
 import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
@@ -12,38 +12,46 @@ export default function Login() {
     setIsRegister(true);
   };
 
-  const [inputs, setInputs] = useState({})
+  const [inputs, setInputs] = useState({});
 
-const handleChange = (event) => {
-  const name = event.target.name;
-  const value = event.target.value;
-  setInputs(values => ({...values, [name]: value}));
-}
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
+  };
 
-const HandleLogin = (event) => {
-  event.preventDefault();
-  axios.post('http://localhost/PHP_csapatkereso/PHP_Csapatkereso/PHP_sze/api/login.php', inputs).then(function(response){
-  console.log(inputs);
-    });
-  }
+  const handleLogin = (event) => {
+    event.preventDefault();
+    axios
+      .post(
+        "http://localhost/projects/php_project/PHP_sze/api/login.php",
+        inputs
+      )
+      .then(function (response) {
+        console.log(inputs);
+      });
+  };
 
   const handleSignup = (event) => {
     event.preventDefault();
 
-    axios.post('http://localhost/PHP_csapatkereso/PHP_Csapatkereso/PHP_sze/api/signup.php', inputs);
+    axios.post(
+      "http://localhost/projects/php_project/PHP_sze/api/signup.php",
+      inputs
+    );
     //console.log(inputs);
-  }
+  };
 
   return !isRegister ? (
     <div className="login-container">
       <h2 className="ui dividing header">Jelentkezz be!</h2>
-      <form className="ui form" onSubmit={HandleLogin} method = "post">
+      <form className="ui form" onSubmit={handleLogin} method="post">
         <div className="field" style={{ marginTop: "30px" }}>
           <label>Felhasználónév</label>
-          <input 
-            type="text" 
-            name="username" 
-            placeholder="Felhasználónév" 
+          <input
+            type="text"
+            name="username"
+            placeholder="Felhasználónév"
             onChange={handleChange}
             required
           />
@@ -51,9 +59,9 @@ const HandleLogin = (event) => {
         <div className="field">
           <label>Jelszó</label>
           <input
-            type="password" 
-            name="password" 
-            placeholder="Jelszó" 
+            type="password"
+            name="password"
+            placeholder="Jelszó"
             onChange={handleChange}
             required
           />
@@ -81,13 +89,13 @@ const HandleLogin = (event) => {
   ) : (
     <div className="login-container">
       <h2 className="ui dividing header">Regisztrálj be!</h2>
-      <form className="ui form" onSubmit={handleSignup} method = "post">
+      <form className="ui form" onSubmit={handleSignup} method="post">
         <div className="field" style={{ marginTop: "30px" }}>
           <label>Felhasználónév</label>
           <input
-            type="text" 
-            name="username" 
-            placeholder="Felhasználónév" 
+            type="text"
+            name="username"
+            placeholder="Felhasználónév"
             onChange={handleChange}
             required
           />
@@ -95,9 +103,9 @@ const HandleLogin = (event) => {
         <div className="field">
           <label>Jelszó</label>
           <input
-            type="password" 
-            name="password" 
-            placeholder="Jelszó" 
+            type="password"
+            name="password"
+            placeholder="Jelszó"
             onChange={handleChange}
             required
           />

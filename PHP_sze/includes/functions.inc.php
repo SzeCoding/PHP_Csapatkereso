@@ -1,7 +1,5 @@
 <?php
-
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Headers: *");
+ header('Access-Control-Allow-Origin: http://localhost:3000');
 
 
 function emptyInputSignup($name, $pass, $passrepeat){

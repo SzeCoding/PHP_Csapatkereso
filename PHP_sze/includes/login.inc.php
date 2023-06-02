@@ -1,4 +1,7 @@
 <?php
+header('Access-Control-Allow-Origin: http://localhost:3000');
+
+header("Access-Control-Allow-Headers: *");
 
 if (isset($_POST["submit"])){
     $name = $_POST["name"];
