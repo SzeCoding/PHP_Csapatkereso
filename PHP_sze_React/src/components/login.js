@@ -22,7 +22,7 @@ const handleChange = (event) => {
 
 const HandleLogin = (event) => {
   event.preventDefault();
-  axios.post('http://localhost/PHP_csapatkereso/PHP_Csapatkereso/PHP_sze/api/login.php', inputs).then(function(response){
+  axios.post('http://localhost/PHP_csapatkereso/PHP_sze/api/login.php', inputs).then(function(response){
   console.log(inputs);
     });
   }
@@ -30,7 +30,7 @@ const HandleLogin = (event) => {
   const handleSignup = (event) => {
     event.preventDefault();
 
-    axios.post('http://localhost/PHP_csapatkereso/PHP_Csapatkereso/PHP_sze/api/signup.php', inputs);
+    axios.post('http://localhost/PHP_csapatkereso/PHP_sze/api/signup.php', inputs);
     //console.log(inputs);
   }
 
