@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+import ProtectedRoutes from "../protectedroutes";
 
 import "../styles/login.css";
 import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
 
 export default function Login() {
   const [isRegister, setIsRegister] = useState(false);
+  const [shouldNavigate, setShouldNavigate] = useState(false);
 
   const handleRegisterClick = () => {
     setIsRegister(true);
@@ -30,6 +32,8 @@ export default function Login() {
       .then(function (response) {
         console.log(inputs);
       });
+
+    setShouldNavigate(true);
   };
 
   const handleSignup = (event) => {
@@ -39,10 +43,12 @@ export default function Login() {
       "http://localhost/projects/php_project/PHP_sze/api/signup.php",
       inputs
     );
-    //console.log(inputs);
+    setShouldNavigate(true);
   };
 
-  return !isRegister ? (
+  return shouldNavigate ? (
+    <Navigate to="/csapatkereso" />
+  ) : !isRegister ? (
     <div className="login-container">
       <h2 className="ui dividing header">Jelentkezz be!</h2>
       <form className="ui form" onSubmit={handleLogin} method="post">
