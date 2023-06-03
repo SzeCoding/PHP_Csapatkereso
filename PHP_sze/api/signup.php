@@ -4,11 +4,11 @@ ini_set('display_errors', 1);
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: *");
 
-    
-
-
-    include '../includes/connect.inc.php';
+    include 'connect.php';
     include '../includes/functions.inc.php';
+
+    $db = new Database;
+    $dbc = $db ->connect();
 
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
