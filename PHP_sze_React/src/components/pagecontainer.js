@@ -128,7 +128,7 @@ export default function PageContainer() {
 
   return (
     <div>
-      <TopBar displayUserName={loggedInUser.username} />
+      <TopBar displayUserName={"kaka"} />
       <div className="ui grid">
         <div className="spacer row">
           <div className="column"></div>

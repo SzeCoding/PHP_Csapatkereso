@@ -8,10 +8,8 @@
 
             if(!$stmt->execute(array($teamname, $teamlimit))){
                 $stmt = null;
-                #header(location login page)
                 exit();
             }
-    
             $stmt = null;
         }
 

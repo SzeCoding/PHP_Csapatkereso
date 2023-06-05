@@ -1,10 +1,32 @@
 import React from "react";
+import axios from "axios";
+
 
 export default class NewTeam extends React.Component {
+  state = {
+    teamname: '',
+    teamlimit: ''
+  };
+  
+  handleAddTeam = event => {
+    event.preventDefault();
+    const teamdata = {
+      teamname: this.state.teamname,
+      teamlimit: this.state.teamlimit
+    }
+    axios.post('http://localhost/PHP_Csapatkereso/PHP_sze/addteam.php', {teamdata})
+  }
+  handleTeamname = event =>{
+    this.setState({teamname: event.target.value});
+  }
+  handleTeamlimit = event =>{
+    this.setState({teamlimit: event.target.value});
+  }
   render() {
     const handleCancel = () => {
-      this.props.handleClick();
-    };
+      this.props.handleClick();}
+
+
     return (
       <div
         className="ui basic content center  aligned segment"
@@ -15,7 +37,7 @@ export default class NewTeam extends React.Component {
           border: "1px solid rgba(34,36,38,.15)",
         }}
       >
-        <form className="ui form">
+        <form className="ui form" onSubmit={this.handleAddTeam} method="post">
           <div>
             <div
               className="ui center aligned segment"
@@ -28,7 +50,12 @@ export default class NewTeam extends React.Component {
             >
               <div className="field">
                 <label>Csapatnév</label>
-                <input type="text" name="teamname" placeholder="Csapatnév" />
+                <input 
+                type="text"
+                name="teamname"
+                placeholder="Csapatnév"
+                onChange={this.handleTeamname}
+                required />
               </div>
             </div>
             <div
@@ -48,6 +75,8 @@ export default class NewTeam extends React.Component {
                   type="number"
                   min="2"
                   name="teamlimit"
+                  onChange={this.handleTeamlimit}
+                  required
                   style={{ width: "5rem" }}
                 />
               </div>
@@ -71,5 +100,5 @@ export default class NewTeam extends React.Component {
         </button>
       </div>
     );
-  }
-}
+            
+}}

@@ -40,8 +40,6 @@ export default function Login() {
   const handleSignup = (event) => {
     event.preventDefault();
 
-    console.log(inputs);
-
     axios
       .post("http://localhost/PHP_Csapatkereso/PHP_sze/signup.php", inputs)
       .then(function (response) {
