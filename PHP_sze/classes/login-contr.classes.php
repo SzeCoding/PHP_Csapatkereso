@@ -19,7 +19,7 @@ class LoginContr extends Login{
             #header(location login page)
             exit();
         }
-        echo "sikeresen lemegy";
+        echo "sikeresen lemegy" . PHP_EOL;
         $this->getUser($this->username, $this->pass);
     }
 

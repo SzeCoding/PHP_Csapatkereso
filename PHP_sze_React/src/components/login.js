@@ -26,7 +26,7 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs)
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/login.php", inputs)
       .then(function (response) {
         console.log(response);
         setShouldNavigate(true);
@@ -43,7 +43,7 @@ export default function Login() {
     console.log(inputs);
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/signup.php", inputs)
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/signup.php", inputs)
       .then(function (response) {
         console.log(response);
         setShouldNavigate(true);
