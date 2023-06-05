@@ -18,7 +18,7 @@ export default class TopBar extends React.Component {
         <div className="ui huge top attached fluid secondary menu">
           <h1 className="ui item header">SZE csapatkereső</h1>
           <div className="right menu">
-            <div className="item">név</div>
+            <div className="item">{this.props.displayUserName}</div>
             <div className="item">
               <button onClick={handleLogout} method="POST">
                 <a className="ui primary button">Kijelentkezés</a>

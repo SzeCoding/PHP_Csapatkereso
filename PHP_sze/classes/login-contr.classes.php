@@ -19,7 +19,6 @@ class LoginContr extends Login{
             #header(location login page)
             exit();
         }
-        echo "sikeresen lemegy";
         $this->getUser($this->username, $this->pass);
     }
 

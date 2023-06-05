@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ProtectedRoutes from "../protectedroutes";
 
@@ -7,8 +7,8 @@ import "../styles/login.css";
 import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
-  const [shouldNavigate, setShouldNavigate] = useState(false);
 
   const handleRegisterClick = () => {
     setIsRegister(true);
@@ -27,13 +27,13 @@ export default function Login() {
 
     axios
       .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs)
-      .then(function (response) {
-        console.log(response);
-        setShouldNavigate(true);
+      .then(function (res) {
+        navigate("/csapatkereso", {
+          state: res.data,
+        });
       })
       .catch(function (error) {
         console.log(error.message);
-        setShouldNavigate(false);
       });
   };
 
@@ -45,18 +45,14 @@ export default function Login() {
     axios
       .post("http://localhost/projects/php_project/PHP_sze/signup.php", inputs)
       .then(function (response) {
-        console.log(response);
-        setShouldNavigate(true);
+        setIsRegister(false);
       })
       .catch(function (error) {
         console.log(error.message);
-        setShouldNavigate(false);
       });
   };
 
-  return shouldNavigate ? (
-    <Navigate to="/csapatkereso" />
-  ) : !isRegister ? (
+  return !isRegister ? (
     <div className="login-container">
       <h2 className="ui dividing header">Jelentkezz be!</h2>
       <form className="ui form" onSubmit={handleLogin} method="post">

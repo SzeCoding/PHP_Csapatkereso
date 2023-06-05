@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import ViewTeam from "./viewteam";
+import { useLocation } from "react-router-dom";
 import TopBar from "./topBar";
 import SideBar from "./sidebar";
-import Teamlist from "./teamlist";
-import { Outlet, Route, useParams } from "react-router-dom";
-import axios from "axios";
+import { Outlet, useParams } from "react-router-dom";
 
 export default function PageContainer() {
+  const location = useLocation();
+  const { state } = location;
+  const loggedInUser = state;
+
   const [courses] = useState([
     {
       courseName: "php",
@@ -104,15 +106,17 @@ export default function PageContainer() {
   const reRender = () => {
     setVal(val + 1);
   };
+
   const { courseid } = useParams();
   const course = courses.find((c) => c.courseID === courseid);
   let displayName = "";
   if (courseid) {
     displayName = course.courseName;
   }
+
   return (
     <div>
-      <TopBar />
+      <TopBar displayUserName={loggedInUser.username} />
       <div className="ui grid">
         <div className="spacer row">
           <div className="column"></div>
