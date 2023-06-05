@@ -2,8 +2,9 @@ import React from "react";
 import axios from "axios";
 
 const handleLogout = () => {
+  console.log("logout gomb");
   axios
-    .post("http://localhost/PHP_Csapatkereso/PHP_sze/api/logout.php") //check if path is correct
+    .post("http://localhost/projects/php_project/PHP_sze/logout.php") //check if path is correct
     .then((response) => {
       window.location.href = "http://localhost:3000/login";
     });
