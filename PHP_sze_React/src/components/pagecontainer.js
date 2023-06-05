@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import TopBar from "./topBar";
 import SideBar from "./sidebar";
 import { Outlet, useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function PageContainer() {
   const location = useLocation();
   const { state } = location;
   const loggedInUser = state;
+  
+    useEffect(() => {
+      getData();
+    }, []);
+
+    const getData = () =>{
+      axios.get('http://localhost/PHP_Csapatkereso/PHP_sze/fetch.php')
+      .then(function(response){
+        console.log(response.data);
+      })
+    }
 
   const [courses] = useState([
     {

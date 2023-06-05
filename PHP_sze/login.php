@@ -28,4 +28,3 @@ switch($method){
     header('Content-Type: application/json');
 
     echo $jsonData;
-

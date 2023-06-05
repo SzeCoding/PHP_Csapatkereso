@@ -26,7 +26,7 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs)
+      .post("http://localhost/PHP_csapatkereso/PHP_sze/login.php", inputs)
       .then(function (res) {
         navigate("/csapatkereso", {
           state: res.data,
