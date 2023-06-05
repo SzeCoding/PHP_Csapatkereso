@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/teamlist.css";
 import NewTeam from "./newteam";
+import axios from 'axios';
 
 import { useOutletContext, useParams, Outlet, Link } from "react-router-dom";
 
@@ -15,6 +16,7 @@ export default function TeamList() {
   }, []);
 
   function handleClick() {
+    axios.post("http://localhost/PHP_csapatkereso/PHP_sze/addteam.php")
     if (isOpen) {
       setIsOpen(false);
     } else {
@@ -48,7 +50,7 @@ export default function TeamList() {
       {displayTeams}
       {isOpen ? (
         <div className="ui basic content center aligned segment">
-          <button onClick={handleClick} className="ui basic button icon">
+          <button onClick={handleClick} method="POST" className="ui basic button icon">
             <i className="large plus icon" />
           </button>
         </div>
