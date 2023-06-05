@@ -19,6 +19,7 @@ class LoginContr extends Login{
             #header(location login page)
             exit();
         }
+
         $this->getUser($this->username, $this->pass);
     }
 

@@ -12,14 +12,28 @@ class Login extends Dbh{
 
         if(!$stmt->execute(array($username))){
             $stmt = null;
-            #header(location login page)
+            http_response_code(400);
+            $response = array(
+                'error' => true,
+                'message' => "Statement failed"
+            );
+            echo "Statement failed";
+            $jsonResponse = json_encode($response);
+            header("Content-Type: application/json");
             exit();
         }
 
 
         if ($stmt->rowCount() == 0){
             $stmt = null;
-            #header(location login page)
+            http_response_code(404);
+            $response = array(
+                'error' => true,
+                'message' => "User not found in database"
+            );
+            echo "User not found in database";
+            $jsonResponse = json_encode($response);
+            header("Content-Type: application/json");
             exit();
         }
 
@@ -29,7 +43,14 @@ class Login extends Dbh{
         
         if ($checkPass == false){
             $stmt = null;
-            #header(location login page)
+            http_response_code(401);
+            $response = array(
+                'error' => true,
+                'message' => "Wrong password"
+            );
+            echo "Wrong password";
+            $jsonResponse = json_encode($response);
+            header("Content-Type: application/json");
             exit();
         }
         else if($checkPass == true){
