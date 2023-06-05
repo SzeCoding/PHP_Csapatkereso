@@ -4,6 +4,7 @@ import TopBar from "./topBar";
 import SideBar from "./sidebar";
 import Teamlist from "./teamlist";
 import { Outlet, Route, useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function PageContainer() {
   const [courses] = useState([
@@ -97,6 +98,7 @@ export default function PageContainer() {
       ],
     },
   ]);
+
   const [val, setVal] = useState(1);
 
   const reRender = () => {

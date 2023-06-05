@@ -14,10 +14,12 @@ class LoginContr extends Login{
     }
 
     public function loginUser(){
+
         if($this->emptyInput() == false){
             #header(location login page)
             exit();
         }
+        echo "sikeresen lemegy";
         $this->getUser($this->username, $this->pass);
     }
 
@@ -29,18 +31,4 @@ class LoginContr extends Login{
         }else{ $result = true;}
         return $result;
     }
-
-
-    private function passMatch(){
-        $result = false;
-        if($this->pass != $this->passRepeat){
-            $result = false;
-        }else{$result = true;}
-        return $result;
-    }
-
-
-
-
-
 }
