@@ -24,29 +24,34 @@ export default function Login() {
 
   const handleLogin = (event) => {
     event.preventDefault();
+
     axios
-      .post(
-        "http://localhost/PHP_Csapatkereso/PHP_sze/api/login.php",
-        inputs
-      )
+      .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs)
       .then(function (response) {
-        console.log(inputs);
+        console.log(response);
         setShouldNavigate(true);
-      }).catch(function (error){
+      })
+      .catch(function (error) {
         console.log(error.message);
         setShouldNavigate(false);
       });
-
   };
 
   const handleSignup = (event) => {
     event.preventDefault();
 
-    axios.post(
-      "http://localhost/PHP_Csapatkereso/PHP_sze/api/signup.php",
-      inputs
-      );
-      setShouldNavigate(true);
+    console.log(inputs);
+
+    axios
+      .post("http://localhost/projects/php_project/PHP_sze/signup.php", inputs)
+      .then(function (response) {
+        console.log(response);
+        setShouldNavigate(true);
+      })
+      .catch(function (error) {
+        console.log(error.message);
+        setShouldNavigate(false);
+      });
   };
 
   return shouldNavigate ? (
