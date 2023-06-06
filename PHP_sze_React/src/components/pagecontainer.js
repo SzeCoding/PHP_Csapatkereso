@@ -1,14 +1,9 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import TopBar from "./topBar";
 import SideBar from "./sidebar";
 import { Outlet, useParams } from "react-router-dom";
 
 export default function PageContainer() {
-  const location = useLocation();
-  const { state } = location;
-  const loggedInUser = state;
-
   const [courses] = useState([
     {
       courseName: "php",
@@ -101,12 +96,6 @@ export default function PageContainer() {
     },
   ]);
 
-  const [val, setVal] = useState(1);
-
-  const reRender = () => {
-    setVal(val + 1);
-  };
-
   const { courseid } = useParams();
   const course = courses.find((c) => c.courseID === courseid);
   let displayName = "";
@@ -116,7 +105,7 @@ export default function PageContainer() {
 
   return (
     <div>
-      <TopBar displayUserName={loggedInUser.username} />
+      <TopBar />
       <div className="ui grid">
         <div className="spacer row">
           <div className="column"></div>
@@ -133,7 +122,7 @@ export default function PageContainer() {
               </div>
             </div>
             <div className="row">
-              <Outlet context={{ course, reRender }} />
+              <Outlet context={{ course }} />
             </div>
           </div>
         </div>

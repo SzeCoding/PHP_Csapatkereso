@@ -1,16 +1,15 @@
 import Login from "./components/login";
 import PageContainer from "./components/pagecontainer";
-
 import {
   Route,
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
-  Outlet,
 } from "react-router-dom";
 import TeamList from "./components/teamlist";
 import ViewTeam from "./components/viewteam";
 import ProtectedRoutes from "./protectedroutes";
+import { UserProvider } from "./context";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,7 +26,11 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+  );
 }
 
 export default App;

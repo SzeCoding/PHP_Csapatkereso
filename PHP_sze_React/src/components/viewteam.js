@@ -23,7 +23,6 @@ export default function ViewTeam() {
 
   const handleClose = () => {
     navigate("/csapatkereso/" + courseid);
-    reRender();
   };
 
   const handleOpen = () => {

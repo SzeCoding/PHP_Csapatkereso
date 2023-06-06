@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import ProtectedRoutes from "../protectedroutes";
-
+import { UserContext } from "../context";
 import "../styles/login.css";
-import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
 
 export default function Login() {
+  const userContext = useContext(UserContext);
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
 
@@ -28,9 +27,8 @@ export default function Login() {
     axios
       .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs)
       .then(function (res) {
-        navigate("/csapatkereso", {
-          state: res.data,
-        });
+        userContext.login(res.data);
+        navigate("/csapatkereso");
       })
       .catch(function (error) {
         console.log(error.message);
