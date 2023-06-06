@@ -2,10 +2,6 @@
 
 class Login extends Dbh{
 
-
-
-
-
     protected function getUser($username, $pass){
         $stmt = $this->connect()->prepare('SELECT * FROM users WHERE userName = ?;');
 

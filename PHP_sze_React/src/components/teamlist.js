@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/teamlist.css";
 import NewTeam from "./newteam";
+import axios from 'axios';
 
 import { useOutletContext, useParams, Outlet, Link } from "react-router-dom";
 
@@ -53,7 +54,7 @@ export default function TeamList() {
           </button>
         </div>
       ) : (
-        <NewTeam handleClick={handleClick} />
+          <NewTeam handleClick={handleClick} />
       )}
     </div>
   );

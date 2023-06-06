@@ -25,7 +25,7 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs)
+      .post("http://localhost/PHP_csapatkereso/PHP_sze/login.php", inputs)
       .then(function (res) {
         userContext.login(res.data);
         navigate("/csapatkereso");
@@ -37,8 +37,6 @@ export default function Login() {
 
   const handleSignup = (event) => {
     event.preventDefault();
-
-    console.log(inputs);
 
     axios
       .post("http://localhost/PHP_Csapatkereso/PHP_sze/signup.php", inputs)
