@@ -1,22 +1,43 @@
 import React, { createContext, useState } from "react";
 
-const UserContext = createContext();
+const DataContext = createContext();
 
-const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+const DataProvider = ({ children }) => {
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   const login = (userData) => {
-    setUser(userData);
+    setLoggedInUser(userData);
   };
 
   const logout = () => {
-    setUser(null);
+    setLoggedInUser(null);
   };
+
+  const [courses, setCourses] = useState({});
+  const [teams, setTeams] = useState({});
+  const [users, setUsers] = useState({});
+
+  const fetchData = (data) => {
+    setCourses(data.courseData);
+    setTeams(data.teamData);
+    setUsers(data.userData);
+  };
+
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <DataContext.Provider
+      value={{
+        loggedInUser,
+        login,
+        logout,
+        fetchData,
+        courses,
+        teams,
+        users,
+      }}
+    >
       {children}
-    </UserContext.Provider>
+    </DataContext.Provider>
   );
 };
 
-export { UserContext, UserProvider };
+export { DataContext, DataProvider };

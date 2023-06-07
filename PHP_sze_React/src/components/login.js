@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "../context";
+import { DataContext } from "../context";
 import "../styles/login.css";
 
 export default function Login() {
-  const userContext = useContext(UserContext);
+  const dataContext = useContext(DataContext);
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
 
@@ -25,10 +25,16 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/PHP_csapatkereso/PHP_sze/login.php", inputs)
+      .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs)
       .then(function (res) {
-        userContext.login(res.data);
-        navigate("/csapatkereso");
+        dataContext.login(res.data);
+        //prefetch data if login is succesful
+        axios
+          .get("http://localhost/projects/php_project/PHP_sze/fetch.php")
+          .then(function (res) {
+            dataContext.fetchData(res.data);
+            navigate("/csapatkereso");
+          });
       })
       .catch(function (error) {
         console.log(error.message);
@@ -39,7 +45,7 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/PHP_Csapatkereso/PHP_sze/signup.php", inputs)
+      .post("http://localhost/projects/php_project/PHP_sze/signup.php", inputs)
       .then(function (response) {
         setIsRegister(false);
       })

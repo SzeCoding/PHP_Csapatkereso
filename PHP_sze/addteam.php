@@ -2,7 +2,7 @@
     header('Access-Control-Allow-Origin: http://localhost:3000');
     header("Access-Control-Allow-Headers: *");
 
-    include 'classes/addteam.classes.php';
+    include 'classes/team.classes.php';
 
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
@@ -11,7 +11,7 @@
             $teamname = $team['teamdata']['teamname'];
             $teamlimit = $team['teamdata']['teamlimit'];
 
-            $team = new team;
+            $team = new Team;
             $team->AddTeam($teamname, $teamlimit);
 
     }

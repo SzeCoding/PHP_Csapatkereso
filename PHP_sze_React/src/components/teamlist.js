@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/teamlist.css";
 import NewTeam from "./newteam";
-import axios from 'axios';
+import axios from "axios";
 
 import { useOutletContext, useParams, Outlet, Link } from "react-router-dom";
+import { DataContext } from "../context";
 
 export default function TeamList() {
+  const dataContext = useContext(DataContext);
   const { courseid } = useParams();
-  const { teamid } = useParams();
-  const { course } = useOutletContext();
   const [isOpen, setIsOpen] = useState({ isOpen: false });
 
   useEffect(() => {
@@ -22,20 +22,23 @@ export default function TeamList() {
       setIsOpen(true);
     }
   }
-  const displayTeams = course.teams.map((team, index) => (
-    <Link to={"/csapatkereso/" + courseid + "/" + team.teamID} key={index}>
-      <div className="link item">
-        <div className="ui menu">
-          <div className="header item">
-            <h3>{team.teamName}</h3>
-          </div>
-          <div className="header right item">
-            <h3>5/4</h3>
+  console.log(dataContext.teams);
+  const displayTeams = dataContext.teams
+    .filter((team) => team.courseId == courseid)
+    .map((team, index) => (
+      <Link to={"/csapatkereso/" + courseid + "/" + team.teamId} key={index}>
+        <div className="link item">
+          <div className="ui menu">
+            <div className="header item">
+              <h3>{team.teamName}</h3>
+            </div>
+            <div className="header right item">
+              <h3>{team.teamLimit}</h3>
+            </div>
           </div>
         </div>
-      </div>
-    </Link>
-  ));
+      </Link>
+    ));
 
   return (
     <div
@@ -54,7 +57,7 @@ export default function TeamList() {
           </button>
         </div>
       ) : (
-          <NewTeam handleClick={handleClick} />
+        <NewTeam handleClick={handleClick} />
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Member from "./member";
 import NewMember from "./newmember";
 import {
@@ -8,17 +8,21 @@ import {
   useParams,
 } from "react-router-dom";
 import { useState } from "react";
+import { DataContext } from "../context";
 
 export default function ViewTeam() {
   const [isOpen, setIsOpen] = useState(false);
-  const { course } = useOutletContext();
-  const { reRender } = useOutletContext();
   const { courseid } = useParams();
+  const dataContext = useContext(DataContext);
+
   const { teamid } = useParams();
-  const team = course.teams.find((t) => t.teamID === teamid);
-  const members = team.members.map((member) => (
-    <Member memberName={member.memberName} key={member.memberID} />
-  ));
+  const team = dataContext.teams.find((t) => t.teamId == teamid);
+
+  const members = dataContext.users
+    .filter((user) => user.teamId == teamid)
+    .map((member) => (
+      <Member memberName={member.userName} key={member.userId} />
+    ));
   const navigate = useNavigate();
 
   const handleClose = () => {
@@ -78,7 +82,7 @@ export default function ViewTeam() {
                 boxShadow: "none",
               }}
             >
-              5/4
+              {team.teamLimit}
             </h2>
           </div>
           {members}

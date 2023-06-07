@@ -1,5 +1,5 @@
 <?php
-    class team extends Dbh{
+    class Team extends Dbh{
 
         public function AddTeam($teamname, $teamlimit){
 

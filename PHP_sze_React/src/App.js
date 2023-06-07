@@ -9,7 +9,7 @@ import {
 import TeamList from "./components/teamlist";
 import ViewTeam from "./components/viewteam";
 import ProtectedRoutes from "./protectedroutes";
-import { UserProvider } from "./context";
+import { DataProvider } from "./context";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,9 +27,9 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <UserProvider>
+    <DataProvider>
       <RouterProvider router={router} />
-    </UserProvider>
+    </DataProvider>
   );
 }
 

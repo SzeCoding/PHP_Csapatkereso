@@ -10,6 +10,14 @@
 switch($method){
     case "GET":
         $fetch = new Fetch();
-        print_r($fetch->getTeamData());
-        print_r($fetch->getUserData());
+
+
+        $response = array(
+                "courseData" => $fetch->getCourseData(),
+                "teamData" => $fetch->getTeamData(),
+                "userData" => $fetch->getUserData()
+            );
+
+            echo json_encode($response);
+ 
     }
