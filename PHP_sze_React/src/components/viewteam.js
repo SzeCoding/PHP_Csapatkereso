@@ -18,6 +18,8 @@ export default function ViewTeam() {
   const { teamid } = useParams();
   const team = dataContext.teams.find((t) => t.teamId == teamid);
 
+  console.log(team.teamMembersCount);
+
   const members = dataContext.users
     .filter((user) => user.teamId == teamid)
     .map((member) => (
@@ -82,7 +84,7 @@ export default function ViewTeam() {
                 boxShadow: "none",
               }}
             >
-              {team.teamLimit}
+              {team.teamLimit} / {team.teamMembersCount}
             </h2>
           </div>
           {members}

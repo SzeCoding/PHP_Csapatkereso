@@ -8,7 +8,7 @@ import { DataContext } from "../context";
 
 export default function PageContainer() {
   const dataContext = useContext(DataContext);
-
+  console.log(dataContext.teams);
   useEffect(() => {
     getData();
   }, []);

@@ -33,7 +33,9 @@ export default function TeamList() {
               <h3>{team.teamName}</h3>
             </div>
             <div className="header right item">
-              <h3>{team.teamLimit}</h3>
+              <h3>
+                {team.teamLimit} / {team.teamMembersCount}
+              </h3>
             </div>
           </div>
         </div>
