@@ -1,11 +1,11 @@
 <?php
     class Team extends Dbh{
 
-        public function setTeam($courseId, $teamname, $teamlimit){
+        public function setTeam($courseId, $teamName, $teamLimit){
 
             $stmt = $this->connect()->prepare('INSERT INTO team (courseId, teamName, teamLimit)  VALUES(?,?,?);');
 
-            if(!$stmt->execute(array($courseId, $teamname, $teamlimit))){
+            if(!$stmt->execute(array($courseId, $teamName, $teamLimit))){
                 $stmt = null;
                 exit();
             }
@@ -20,9 +20,10 @@
             }
             $stmt = null;
         }
-        public function getteamId($teamname, $courseId){
+
+        public function getTeamId($teamName, $courseId){
             $stmt = $this->connect()->prepare('SELECT teamId FROM team WHERE teamName = ? AND courseId = ?');
-            if(!$stmt->execute(array($teamname, $courseId))){
+            if(!$stmt->execute(array($teamName, $courseId))){
                 $stmt = null;
                 exit();
             }
@@ -31,6 +32,7 @@
             return $result;
             $stmt = null;
         }
+
         public function updateTeam($teamId, $userId){
             $stmt = $this->connect()->prepare('UPDATE users SET teamId = ? WHERE userId = ?;');
 
@@ -59,6 +61,18 @@
             return $resultCheck;
             $stmt = null;
         }
+        public function checkTeam($teamName){
+            $stmt = $this->connect()->prepare('SELECT teamName FROM team WHERE teamName =?;');
 
+            if(!$stmt->execute(array($teamName))){
+                $stmt = null;
+                exit();
+            }
+            $resultCheck = null;
+            if ($stmt->rowCount() == 0){
+                $resultCheck = false;
+            }else{$resultCheck = true;}
+            return $resultCheck;
+        }
     }
             
