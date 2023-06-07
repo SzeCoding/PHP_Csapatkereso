@@ -14,10 +14,12 @@
             $teamcourse = substr($teamdata['teamdata']['teamcourse'], -4);
             $teamadmin = $teamdata['teamdata']['teamadmin'];
 
-
+            
             $team = new Team;
-            $team->AddTeam($teamcourse, $teamname, $teamlimit);
-            $team->SetAdmin($teamadmin);
+            $team->setTeam($teamcourse, $teamname, $teamlimit);
+            $team->setAdmin($teamadmin);
+            $teamId = $team->getteamId($teamname,$teamcourse);
+            $team->updateTeam($teamId, $teamadmin);
 
 
     }
