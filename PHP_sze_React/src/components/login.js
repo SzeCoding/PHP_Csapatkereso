@@ -25,12 +25,12 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs)
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/login.php", inputs)
       .then(function (res) {
         dataContext.login(res.data);
         //prefetch data if login is succesful
         axios
-          .get("http://localhost/projects/php_project/PHP_sze/fetch.php")
+          .get("http://localhost/PHP_Csapatkereso/PHP_sze/fetch.php")
           .then(function (res) {
             dataContext.fetchData(res.data);
             console.log(res.data);
@@ -46,7 +46,7 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/signup.php", inputs)
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/signup.php", inputs)
       .then(function (response) {
         setIsRegister(false);
       })

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { DataContext } from "../context";
+import axios from "axios";
 
 export default function SideBar() {
   const dataContext = useContext(DataContext);
@@ -11,7 +12,7 @@ export default function SideBar() {
       to={"/csapatkereso/" + course.courseId}
       key={course.courseId}
     >
-      {course.courseName}
+        {course.courseName}
     </NavLink>
   ));
 

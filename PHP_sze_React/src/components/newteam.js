@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
+import { DataContext } from "../context";
 
 
 export default class NewTeam extends React.Component {
@@ -8,11 +9,16 @@ export default class NewTeam extends React.Component {
     teamlimit: ''
   };
   
-  handleAddTeam = event => {
+  handleAddTeam = (event) => {
     event.preventDefault();
+    const dataContext = useContext(DataContext);
+    const loggedInUser = dataContext.loggedInUser;
     const teamdata = {
       teamname: this.state.teamname,
-      teamlimit: this.state.teamlimit
+      teamlimit: this.state.teamlimit,
+      teamcourse: window.location.href,
+      teamadmin: loggedInUser
+
     }
     axios.post('http://localhost/PHP_Csapatkereso/PHP_sze/addteam.php', {teamdata})
   }

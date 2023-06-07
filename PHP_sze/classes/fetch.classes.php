@@ -26,10 +26,8 @@ ini_set('display_errors', 1);
         }
         
         public function getUserData(){
-            $sql = 'SELECT users.userId, users.userName, users.isAdmin, users.teamId, team.courseId
-                    FROM users
-                    INNER JOIN team ON users.teamId = team.teamId
-                    INNER JOIN courses ON team.courseId = courses.courseId';
+            $sql = 'SELECT userId, userName, isAdmin, teamId
+                    FROM users';
 
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute();
