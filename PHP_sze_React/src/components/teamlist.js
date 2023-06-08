@@ -10,10 +10,7 @@ export default function TeamList() {
   const dataContext = useContext(DataContext);
   const { courseid } = useParams();
   const [isOpen, setIsOpen] = useState({ isOpen: false });
-
-  useEffect(() => {
-    console.log("mounted teamlist");
-  }, []);
+  const [handleTeamCreated] = useOutletContext();
 
   function handleClick() {
     if (isOpen) {
@@ -51,15 +48,20 @@ export default function TeamList() {
       }}
     >
       {displayTeams}
-      {isOpen ? (
-        <div className="ui basic content center aligned segment">
-          <button onClick={handleClick} className="ui basic button icon">
-            <i className="large plus icon" />
-          </button>
-        </div>
-      ) : (
-        <NewTeam handleClick={handleClick} courseid={courseid} />
-      )}
+      {!dataContext.loggedInUser.teamId &&
+        (isOpen ? (
+          <div className="ui basic content center aligned segment">
+            <button onClick={handleClick} className="ui basic button icon">
+              <i className="large plus icon" />
+            </button>
+          </div>
+        ) : (
+          <NewTeam
+            handleClick={handleClick}
+            courseid={courseid}
+            handleTeamCreated={handleTeamCreated}
+          />
+        ))}
     </div>
   );
 }
