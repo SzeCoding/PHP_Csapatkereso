@@ -15,6 +15,7 @@
             $teamData = json_decode(file_get_contents('php://input'), true);
             $teamId = $teamData['teamdata']['teamId'];
             $teamAdmin = $teamData['teamdata']['teamAdmin'];
-            echo $teamId,' ', $teamAdmin;
 
+            $team = new DelTeamContr($teamId, $teamAdmin);
+            $team->DeleteTeam();
         }

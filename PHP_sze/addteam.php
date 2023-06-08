@@ -19,6 +19,6 @@
             $teamAdmin = $teamData['teamdata']['teamAdmin'];
 
             
-            $team = new TeamContr($teamCourse, $teamName, $teamLimit, $teamAdmin);
+            $team = new AddTeamContr($teamCourse, $teamName, $teamLimit, $teamAdmin);
             $team->createTeam();
     }

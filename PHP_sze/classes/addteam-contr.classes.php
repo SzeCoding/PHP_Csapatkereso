@@ -1,6 +1,6 @@
 <?php
 
-class TeamContr extends Team{
+class AddTeamContr extends Team{
 
     private $courseId;
     private $teamName;

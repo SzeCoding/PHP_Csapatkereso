@@ -86,7 +86,7 @@
             }
         }
 
-        public function delAdmin($teamId){
+        public function delUsers($teamId){
             $stmt = $this->connect()->prepare('UPDATE users SET isAdmin = 0, teamId = NULL WHERE teamId = ?;');
 
             if (!$stmt->execute(array($teamId))){
