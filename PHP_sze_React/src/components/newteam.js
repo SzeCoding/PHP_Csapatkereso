@@ -19,11 +19,13 @@ export default function ViewTeam(props) {
       teamadmin: loggedInUser.userId,
     };
 
-    console.log(teamdata);
+    console.log(props);
 
-    axios.post("http://localhost/projects/php_project/PHP_sze/addteam.php", {
-      teamdata,
-    });
+    axios
+      .post("http://localhost/projects/php_project/PHP_sze/addteam.php", {
+        teamdata,
+      })
+      .then(props.handleClick(), props.handleTeamCreated());
   };
 
   const handleTeamname = (event) => {

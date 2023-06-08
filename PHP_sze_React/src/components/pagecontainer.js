@@ -8,9 +8,11 @@ import { DataContext } from "../context";
 
 export default function PageContainer() {
   const dataContext = useContext(DataContext);
+  const [teamsUpdated, setTeamsUpdated] = useState(false);
+
   useEffect(() => {
     getData();
-  }, []);
+  }, [teamsUpdated]);
 
   const getData = () => {
     axios
@@ -19,6 +21,12 @@ export default function PageContainer() {
         dataContext.fetchData(res.data);
       });
   };
+
+  const handleTeamCreated = () => {
+    setTeamsUpdated(!teamsUpdated);
+  };
+
+  console.log("pc rendered");
 
   return (
     <div>
@@ -37,7 +45,7 @@ export default function PageContainer() {
               <div className="ui basic content center aligned segment"></div>
             </div>
             <div className="row">
-              <Outlet />
+              <Outlet context={[handleTeamCreated]} />
             </div>
           </div>
         </div>

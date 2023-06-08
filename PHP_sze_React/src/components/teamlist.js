@@ -10,10 +10,7 @@ export default function TeamList() {
   const dataContext = useContext(DataContext);
   const { courseid } = useParams();
   const [isOpen, setIsOpen] = useState({ isOpen: false });
-
-  useEffect(() => {
-    console.log("mounted teamlist");
-  }, []);
+  const [handleTeamCreated] = useOutletContext();
 
   function handleClick() {
     if (isOpen) {
@@ -58,7 +55,11 @@ export default function TeamList() {
           </button>
         </div>
       ) : (
-        <NewTeam handleClick={handleClick} courseid={courseid} />
+        <NewTeam
+          handleClick={handleClick}
+          courseid={courseid}
+          handleTeamCreated={handleTeamCreated}
+        />
       )}
     </div>
   );
