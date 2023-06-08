@@ -22,6 +22,7 @@
                 exit();
             }
             $this->delUsers($this->userId);
+            $this->unsetAdmin($this->userId);
             $this->delTeam($this->teamId);
         }
     }
