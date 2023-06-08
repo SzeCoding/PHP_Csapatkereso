@@ -5,6 +5,11 @@ const DataContext = createContext();
 const DataProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
 
+  const userUpdate = (userData) => {
+    setLoggedInUser(userData);
+    console.log(userData);
+  };
+
   const login = (userData) => {
     setLoggedInUser(userData);
   };
@@ -33,6 +38,7 @@ const DataProvider = ({ children }) => {
         courses,
         teams,
         users,
+        userUpdate,
       }}
     >
       {children}

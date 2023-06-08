@@ -19,8 +19,6 @@ export default function ViewTeam(props) {
       teamadmin: loggedInUser.userId,
     };
 
-    console.log(props);
-
     axios
       .post("http://localhost/projects/php_project/PHP_sze/addteam.php", {
         teamdata,

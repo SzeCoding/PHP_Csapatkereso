@@ -21,14 +21,6 @@ export default function TeamList() {
     }
   }
 
-  console.log(
-    dataContext.teams
-      .filter((team) => team.courseId == courseid)
-      .forEach((team) => {
-        console.log(team.teamId, loggedInUser.loggedInUser);
-      })
-  );
-
   const displayTeams = dataContext.teams
     .filter((team) => team.courseId == courseid)
     .map((team, index) => (

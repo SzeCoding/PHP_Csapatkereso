@@ -19,14 +19,17 @@ export default function PageContainer() {
       .get("http://localhost/projects/php_project/PHP_sze/fetch.php")
       .then(function (res) {
         dataContext.fetchData(res.data);
+        const updatedUser = res.data.userData.find(
+          (user) => user.userId === dataContext.loggedInUser.userId
+        );
+
+        dataContext.userUpdate(updatedUser);
       });
   };
 
   const handleTeamCreated = () => {
     setTeamsUpdated(!teamsUpdated);
   };
-
-  console.log("pc rendered");
 
   return (
     <div>

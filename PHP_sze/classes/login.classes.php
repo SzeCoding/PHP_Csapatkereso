@@ -72,9 +72,8 @@ class Login extends Dbh{
         session_start();
         $_SESSION["userId"] = $user[0]["userId"];
         $_SESSION["username"] = $user[0]["userName"];
-        $_SESSION["pass"] = $user[0]["userPass"];
-        $_SESSION["teamId"] = $user[0]["teamId"];
         $_SESSION["isAdmin"] = $user[0]["isAdmin"];
+        $_SESSION["teamId"] = $user[0]["teamId"];
 
         
 
