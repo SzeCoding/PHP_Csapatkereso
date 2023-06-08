@@ -16,7 +16,7 @@ export default function PageContainer() {
 
   const getData = () => {
     axios
-      .get("http://localhost/projects/php_project/PHP_sze/fetch.php")
+      .get("http://localhost/PHP_Csapatkereso/PHP_sze/fetch.php")//http://localhost/projects/php_project/PHP_sze/fetch.php
       .then(function (res) {
         dataContext.fetchData(res.data);
         const updatedUser = res.data.userData.find(

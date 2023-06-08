@@ -13,10 +13,10 @@ export default function ViewTeam(props) {
     event.preventDefault();
 
     const teamdata = {
-      teamname: teamname,
-      teamlimit: teamlimit,
-      teamcourse: props.courseid,
-      teamadmin: loggedInUser.userId,
+      teamName: teamname,
+      teamLimit: teamlimit,
+      teamCourse: props.courseid,
+      teamAdmin: loggedInUser.userId
     };
 
     axios

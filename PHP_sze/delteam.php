@@ -7,18 +7,15 @@
 
     include "classes/dbh.classes.php"; 
     include "classes/team.classes.php";
-    include "classes/addteam-contr.classes.php";
+    include "classes/delteam-contr.classes.php";
 
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
         case "POST":
             $teamData = json_decode(file_get_contents('php://input'), true);
-            $teamName = $teamData['teamdata']['teamName'];
-            $teamLimit = $teamData['teamdata']['teamLimit'];
-            $teamCourse = $teamData['teamdata']['teamCourse'];
+            $teamId = $teamData['teamdata']['teamId'];
             $teamAdmin = $teamData['teamdata']['teamAdmin'];
 
-            
-            $team = new AddTeamContr($teamCourse, $teamName, $teamLimit, $teamAdmin);
-            $team->createTeam();
-    }
+            $team = new DelTeamContr($teamId, $teamAdmin);
+            $team->DeleteTeam();
+        }
