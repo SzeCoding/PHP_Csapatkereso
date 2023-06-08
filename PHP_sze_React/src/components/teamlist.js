@@ -8,6 +8,7 @@ import { DataContext } from "../context";
 
 export default function TeamList() {
   const dataContext = useContext(DataContext);
+  const loggedInUser = dataContext.loggedInUser;
   const { courseid } = useParams();
   const [isOpen, setIsOpen] = useState({ isOpen: false });
   const [handleTeamCreated] = useOutletContext();
@@ -19,12 +20,28 @@ export default function TeamList() {
       setIsOpen(true);
     }
   }
+
+  console.log(
+    dataContext.teams
+      .filter((team) => team.courseId == courseid)
+      .forEach((team) => {
+        console.log(team.teamId, loggedInUser.loggedInUser);
+      })
+  );
+
   const displayTeams = dataContext.teams
     .filter((team) => team.courseId == courseid)
     .map((team, index) => (
       <Link to={"/csapatkereso/" + courseid + "/" + team.teamId} key={index}>
         <div className="link item">
-          <div className="ui menu">
+          <div
+            className="ui menu"
+            style={{
+              border: `${
+                team.teamId == loggedInUser.teamId ? "2px solid #2D7AC8" : ""
+              }`,
+            }}
+          >
             <div className="header item">
               <h3>{team.teamName}</h3>
             </div>
