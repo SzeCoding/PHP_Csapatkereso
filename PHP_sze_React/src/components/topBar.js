@@ -8,7 +8,7 @@ export default function TopBar(props) {
 
   const handleLogout = () => {
     axios
-      .post("http://localhost/PHP_Csapatkereso/PHP_sze/logout.php") // Check if the path is correct
+      .post("http://localhost/projects/php_project/PHP_sze/fetch.php") // Check if the path is correct
       .then((response) => {
         window.location.href = "http://localhost:3000/login";
         dataContext.logout();

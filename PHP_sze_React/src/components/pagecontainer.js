@@ -8,14 +8,13 @@ import { DataContext } from "../context";
 
 export default function PageContainer() {
   const dataContext = useContext(DataContext);
-  console.log(dataContext.teams);
   useEffect(() => {
     getData();
   }, []);
 
   const getData = () => {
     axios
-      .get("http://localhost/PHP_Csapatkereso/PHP_sze/fetch.php")
+      .get("http://localhost/projects/php_project/PHP_sze/fetch.php")
       .then(function (res) {
         dataContext.fetchData(res.data);
       });

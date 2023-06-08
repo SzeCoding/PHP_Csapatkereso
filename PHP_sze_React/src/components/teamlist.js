@@ -22,7 +22,6 @@ export default function TeamList() {
       setIsOpen(true);
     }
   }
-  console.log(dataContext.teams);
   const displayTeams = dataContext.teams
     .filter((team) => team.courseId == courseid)
     .map((team, index) => (
@@ -59,7 +58,7 @@ export default function TeamList() {
           </button>
         </div>
       ) : (
-        <NewTeam handleClick={handleClick} />
+        <NewTeam handleClick={handleClick} courseid={courseid} />
       )}
     </div>
   );

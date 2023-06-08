@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { DataContext } from "../context";
 
-const NewTeam = (props) => {
-  const [teamname, setTeamname] = useState('');
-  const [teamlimit, setTeamlimit] = useState('');
+export default function ViewTeam(props) {
+  const [teamname, setTeamname] = useState("");
+  const [teamlimit, setTeamlimit] = useState("");
 
   const dataContext = useContext(DataContext);
   const loggedInUser = dataContext.loggedInUser;
@@ -15,18 +15,22 @@ const NewTeam = (props) => {
     const teamdata = {
       teamname: teamname,
       teamlimit: teamlimit,
-      teamcourse: window.location.href,
-      teamadmin: loggedInUser.userId
+      teamcourse: props.courseid,
+      teamadmin: loggedInUser.userId,
     };
 
-    axios.post('http://localhost/PHP_Csapatkereso/PHP_sze/addteam.php', { teamdata });
+    console.log(teamdata);
+
+    axios.post("http://localhost/projects/php_project/PHP_sze/addteam.php", {
+      teamdata,
+    });
   };
 
-  const handleTeamname = event => {
+  const handleTeamname = (event) => {
     setTeamname(event.target.value);
   };
 
-  const handleTeamlimit = event => {
+  const handleTeamlimit = (event) => {
     setTeamlimit(event.target.value);
   };
 
@@ -108,6 +112,4 @@ const NewTeam = (props) => {
       </button>
     </div>
   );
-};
-
-export default NewTeam;
+}
