@@ -11,6 +11,7 @@
             }
             $stmt = null;
         }
+
         public function setAdmin($userId){
             $stmt = $this->connect()->prepare('UPDATE users SET isAdmin = 1 WHERE userId = ?;');
 
@@ -61,6 +62,7 @@
             return $resultCheck;
             $stmt = null;
         }
+
         public function checkTeam($teamName){
             $stmt = $this->connect()->prepare('SELECT teamName FROM team WHERE teamName =?;');
 
@@ -73,6 +75,24 @@
                 $resultCheck = false;
             }else{$resultCheck = true;}
             return $resultCheck;
+        }
+
+        public function delTeam($teamId){
+            $stmt = $this->connect()->prepare('DELETE FROM team WHERE teamId = ?;');
+
+            if(!$stmt->execute(array($teamId))){
+                $stmt = null;
+                exit();
+            }
+        }
+
+        public function delAdmin($teamId){
+            $stmt = $this->connect()->prepare('UPDATE users SET isAdmin = 0, teamId = NULL WHERE teamId = ?;');
+
+            if (!$stmt->execute(array($teamId))){
+                $stmt = null;
+                exit();
+            }
         }
     }
             

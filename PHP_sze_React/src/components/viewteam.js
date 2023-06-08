@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import axios from "axios";
 import Member from "./member";
 import NewMember from "./newmember";
 import {
@@ -14,6 +15,7 @@ export default function ViewTeam() {
   const [isOpen, setIsOpen] = useState(false);
   const { courseid } = useParams();
   const dataContext = useContext(DataContext);
+  const loggedInUser = dataContext.loggedInUser;
 
   const { teamid } = useParams();
   const team = dataContext.teams.find((t) => t.teamId == teamid);
@@ -36,6 +38,16 @@ export default function ViewTeam() {
       setIsOpen(true);
     }
   };
+  const handleDelete = () => {
+    const teamdata = {
+      teamId: team.teamId,
+      teamAdmin: loggedInUser.userId
+    }
+
+    console.log(teamdata);
+    axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/delteam.php", {teamdata});
+    //http://localhost/projects/php_project/PHP_sze/delteam.php
+  }
 
   return (
     <div
@@ -129,6 +141,7 @@ export default function ViewTeam() {
           }}
         >
           <button
+            onClick={handleDelete}
             className="ui negative button"
             style={{
               marginRight: "0em",

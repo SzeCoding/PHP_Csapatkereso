@@ -13,17 +13,16 @@ export default function ViewTeam(props) {
     event.preventDefault();
 
     const teamdata = {
-      teamname: teamname,
-      teamlimit: teamlimit,
-      teamcourse: props.courseid,
-      teamadmin: loggedInUser.userId,
+      teamName: teamname,
+      teamLimit: teamlimit,
+      teamCourse: props.courseid,
+      teamAdmin: loggedInUser.userId
     };
 
     console.log(teamdata);
 
-    axios.post("http://localhost/projects/php_project/PHP_sze/addteam.php", {
-      teamdata,
-    });
+    axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/addteam.php", {teamdata,});
+    //http://localhost/projects/php_project/PHP_sze/addteam.php
   };
 
   const handleTeamname = (event) => {

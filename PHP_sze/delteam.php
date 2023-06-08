@@ -5,6 +5,10 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 
+    include "classes/dbh.classes.php"; 
+    include "classes/team.classes.php";
+    include "classes/delteam-contr.classes.php";
+
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
         case "POST":
@@ -13,8 +17,4 @@
             $teamAdmin = $teamData['teamdata']['teamAdmin'];
             echo $teamId,' ', $teamAdmin;
 
-            include "classes/dbh.classes.php"; 
-            include "classes/team.classes.php";
-
-            $team = new Team
         }
