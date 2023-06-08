@@ -48,19 +48,20 @@ export default function TeamList() {
       }}
     >
       {displayTeams}
-      {isOpen ? (
-        <div className="ui basic content center aligned segment">
-          <button onClick={handleClick} className="ui basic button icon">
-            <i className="large plus icon" />
-          </button>
-        </div>
-      ) : (
-        <NewTeam
-          handleClick={handleClick}
-          courseid={courseid}
-          handleTeamCreated={handleTeamCreated}
-        />
-      )}
+      {!dataContext.loggedInUser.teamId &&
+        (isOpen ? (
+          <div className="ui basic content center aligned segment">
+            <button onClick={handleClick} className="ui basic button icon">
+              <i className="large plus icon" />
+            </button>
+          </div>
+        ) : (
+          <NewTeam
+            handleClick={handleClick}
+            courseid={courseid}
+            handleTeamCreated={handleTeamCreated}
+          />
+        ))}
     </div>
   );
 }
