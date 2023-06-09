@@ -20,7 +20,7 @@ export default function TopBar(props) {
       <div className="ui huge top attached fluid secondary menu">
         <h1 className="ui item header">SZE csapatkereső</h1>
         <div className="right menu">
-          <div className="item">{loggedInUser.username}</div>
+          <div className="item">{loggedInUser.userName}</div>
           <div className="item">
             <button onClick={handleLogout} method="POST">
               <a className="ui primary button">Kijelentkezés</a>

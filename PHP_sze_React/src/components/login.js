@@ -33,7 +33,6 @@ export default function Login() {
           .get("http://localhost/PHP_Csapatkereso/PHP_sze/fetch.php")//http://localhost/projects/php_project/PHP_sze/fetch.php
           .then(function (res) {
             dataContext.fetchData(res.data);
-            console.log(res.data);
             navigate("/csapatkereso");
           });
       })
