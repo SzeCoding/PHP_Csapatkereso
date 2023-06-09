@@ -3,8 +3,8 @@ import axios from "axios";
 import { DataContext } from "../context";
 
 export default function ViewTeam(props) {
-  const [teamname, setTeamname] = useState("");
-  const [teamlimit, setTeamlimit] = useState("");
+  const [teamname, setTeamName] = useState("");
+  const [teamlimit, setTeamLimit] = useState("");
 
   const dataContext = useContext(DataContext);
   const loggedInUser = dataContext.loggedInUser;
@@ -24,12 +24,12 @@ export default function ViewTeam(props) {
       .then(props.handleClick(), props.handleTeamCreated());
   };
 
-  const handleTeamname = (event) => {
-    setTeamname(event.target.value);
+  const handleTeamName = (event) => {
+    setTeamName(event.target.value);
   };
 
-  const handleTeamlimit = (event) => {
-    setTeamlimit(event.target.value);
+  const handleTeamLimit = (event) => {
+    setTeamLimit(event.target.value);
   };
 
   const handleCancel = () => {
@@ -63,7 +63,7 @@ export default function ViewTeam(props) {
                 type="text"
                 name="teamname"
                 placeholder="Csapatnév"
-                onChange={handleTeamname}
+                onChange={handleTeamName}
                 required
               />
             </div>
@@ -85,7 +85,7 @@ export default function ViewTeam(props) {
                 type="number"
                 min="2"
                 name="teamlimit"
-                onChange={handleTeamlimit}
+                onChange={handleTeamLimit}
                 required
                 style={{ width: "5rem" }}
               />

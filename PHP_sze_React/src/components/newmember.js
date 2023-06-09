@@ -10,17 +10,20 @@ import { useState } from "react";
 import { DataContext } from "../context";
 
 const NewMember = (props) => {
-  const { courseid } = useParams();
+  const [invitename, setMemberName] = useState("");
   const dataContext = useContext(DataContext);
-  const loggedInUser = dataContext.loggedInUser;
   const { teamid } = useParams();
   const team = dataContext.teams.find((t) => t.teamId == teamid);
+
+  const handleMemberName = (event) =>{
+    setMemberName(event.target.value);
+  }
 
   const handleInvite = (event) => {
     event.preventDefault();
 
     const invitedata = {
-      newmember :NewMember,
+      invitename: invitename,
       teamid: team.teamId
     } 
 
@@ -56,8 +59,9 @@ const NewMember = (props) => {
               <input
                 className="ui input"
                 type="text"
-                name="newMember"
+                name="invitename"
                 placeholder="felhasználónév"
+                onChange = {handleMemberName}
                 required
               />
               <i className="users icon"></i>

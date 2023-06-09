@@ -5,12 +5,13 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 
-    include "classes/dbh.classes.php"; 
-    include "classes/team.classes.php";
-    include "classes/addteam-contr.classes.php";
+    include "classes/dbh.classes.php";
 
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
         case "POST":
-            echo "invite successful";
+            $inviteData = json_decode(file_get_contents('php://input'), true);
+            $inviteName = $inviteData['invitedata']['invitename'];
+            $teamId = $inviteData['invitedata']['teamid'];
+            echo $inviteName, ' ', $teamId;
     }
