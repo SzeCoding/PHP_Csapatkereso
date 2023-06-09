@@ -103,5 +103,24 @@
                 exit();
             }
         }
+
+        public function checkMember($userId, $teamId){
+            $stmt = $this->connect()->prepare('SELECT teamId FROM users WHERE userId = ?;');
+
+            if (!$stmt->execute(array($userId))){
+                $stmt = null;
+                exit();
+            }
+
+            $resultCheck = null;
+            $isMember = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($isMember[0]["teamId"]==$teamId){
+                $resultCheck = true;
+            }else{
+                 $resultCheck = false;
+            }
+            return $resultCheck;
+            $stmt = null;
+        }
     }
             

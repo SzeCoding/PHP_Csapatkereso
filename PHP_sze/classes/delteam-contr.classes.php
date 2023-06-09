@@ -20,6 +20,16 @@
                 $jsonResponse = json_encode($response);
                 header("Content-Type: application/json");
                 exit();
+            }if($this->checkMember($this->userId, $this->teamId) == false){
+                http_response_code(403);
+                $response = array(
+                    'error' => true,
+                    'message' => "Not a member"
+                );
+                echo "Not a member";
+                $jsonResponse = json_encode($response);
+                header("Content-Type: application/json");
+                exit();
             }
             $this->delUsers($this->userId);
             $this->unsetAdmin($this->userId);

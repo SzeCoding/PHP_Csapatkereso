@@ -22,9 +22,7 @@ export default function ViewTeam(props) {
     console.log(props);
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/addteam.php", {
-        teamdata,
-      })
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/addteam.php", {teamdata}) //http://localhost/projects/php_project/PHP_sze/addteam.php
       .then(props.handleClick(), props.handleTeamCreated());
   };
 
