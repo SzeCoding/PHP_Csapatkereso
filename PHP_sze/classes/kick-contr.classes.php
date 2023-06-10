@@ -8,7 +8,6 @@
         }
 
         public function kickUser(){
-
             $this->updateTeam(null, $this->getUserId($this->userName));
         }
 }
