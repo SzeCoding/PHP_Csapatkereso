@@ -91,6 +91,20 @@
             return $resultCheck;
         }
 
+        public function checkUser($userName){
+            $stmt = $this->connect()->prepare('SELECT userName FROM users WHERE userName =?;');
+
+            if(!$stmt->execute(array($userName))){
+                $stmt = null;
+                exit();
+            }
+            $resultCheck = null;
+            if ($stmt->rowCount() == 0){
+                $resultCheck = false;
+            }else{$resultCheck = true;}
+            return $resultCheck;
+        }
+
         public function delTeam($teamId){
             $stmt = $this->connect()->prepare('DELETE FROM team WHERE teamId = ?;');
 
