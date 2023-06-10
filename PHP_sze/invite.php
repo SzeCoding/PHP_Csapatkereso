@@ -6,6 +6,8 @@
     ini_set('display_errors', 1);
 
     include "classes/dbh.classes.php";
+    include "classes/team.classes.php";
+    include "classes/invite-contr.classes.php";
 
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
@@ -13,5 +15,7 @@
             $inviteData = json_decode(file_get_contents('php://input'), true);
             $inviteName = $inviteData['invitedata']['invitename'];
             $teamId = $inviteData['invitedata']['teamid'];
-            echo $inviteName, ' ', $teamId;
+
+            $team = new InviteContr($teamId, $inviteName);
+            $team->Invite();
     }

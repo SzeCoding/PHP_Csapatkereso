@@ -2,7 +2,6 @@
     class Team extends Dbh{
 
         public function setTeam($courseId, $teamName, $teamLimit){
-
             $stmt = $this->connect()->prepare('INSERT INTO team (courseId, teamName, teamLimit)  VALUES(?,?,?);');
 
             if(!$stmt->execute(array($courseId, $teamName, $teamLimit))){
@@ -22,8 +21,23 @@
             $stmt = null;
         }
 
+        public function getUserId($userName){
+            $stmt = $this->connect()->prepare('SELECT userId FROM users WHERE userName = ?');
+            
+            if(!$stmt->execute(array($userName))){
+                $stmt = null;
+                exit();
+            }
+
+            $userId = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $userId[0]["userId"];
+            return $result;
+            $stmt = null;
+        }
+
         public function getTeamId($teamName, $courseId){
             $stmt = $this->connect()->prepare('SELECT teamId FROM team WHERE teamName = ? AND courseId = ?');
+            
             if(!$stmt->execute(array($teamName, $courseId))){
                 $stmt = null;
                 exit();
@@ -104,7 +118,7 @@
             }
         }
 
-        public function checkMember($userId, $teamId){
+        public function isMember($userId, $teamId){
             $stmt = $this->connect()->prepare('SELECT teamId FROM users WHERE userId = ?;');
 
             if (!$stmt->execute(array($userId))){
