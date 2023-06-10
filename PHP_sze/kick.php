@@ -7,15 +7,14 @@
 
     include "classes/dbh.classes.php";
     include "classes/team.classes.php";
-    include "classes/invite-contr.classes.php";
+    include "classes/kick-contr.classes.php";
 
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
         case "POST":
-            $inviteData = json_decode(file_get_contents('php://input'), true);
-            $inviteName = $inviteData['invitedata']['invitename'];
-            $teamId = $inviteData['invitedata']['teamid'];
+            $kickData = json_decode(file_get_contents('php://input'), true);
+            $kickName = $kickData['member'];
 
-            $team = new InviteContr($teamId, $inviteName);
-            $team->Invite();
+            $team = new KickContr($kickName);
+            $team->kickUser();
     }
