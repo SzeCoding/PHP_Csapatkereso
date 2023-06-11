@@ -21,7 +21,8 @@ export default function ViewTeam() {
   const team = dataContext.teams.find((t) => t.teamId == teamid);
   const teamdata = {
     teamId: team.teamId,
-    teamAdmin: loggedInUser.userId
+    teamAdmin: loggedInUser.userId,
+    teamUsername: loggedInUser.userName
   }
 
   const members = dataContext.users
@@ -51,7 +52,7 @@ export default function ViewTeam() {
 
   const handleJoin = () =>{
     console.log(teamdata);
-    axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/leaveteam.php", {teamdata});
+    axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/jointeam.php", {teamdata});
   }
 
   const handleDelete = () => {
