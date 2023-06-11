@@ -18,7 +18,7 @@ const NewMember = (props) => {
   const handleMemberName = (event) =>{
     setMemberName(event.target.value);
   }
-  let button;
+  let invButton;
 
   const handleInvite = (event) => {
     event.preventDefault();
@@ -32,9 +32,9 @@ const NewMember = (props) => {
   }
   if (props.isOpen === false) {
     if(team.teamLimit==team.teamMembersCount){
-      button = <h2>A csapat megtelt!</h2>
+      invButton = <h2>A csapat megtelt!</h2>
     } else {
-      button = <button
+      invButton = <button
       onClick={() => {
         props.handleOpen();
       }}
@@ -45,7 +45,7 @@ const NewMember = (props) => {
       
     return (
       <div className="ui basic content center aligned segment">
-        {button}
+        {invButton}
       </div>
     );
   } else {

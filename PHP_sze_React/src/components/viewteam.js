@@ -19,6 +19,10 @@ export default function ViewTeam() {
 
   const { teamid } = useParams();
   const team = dataContext.teams.find((t) => t.teamId == teamid);
+  const teamdata = {
+    teamId: team.teamId,
+    teamAdmin: loggedInUser.userId
+  }
 
   const members = dataContext.users
     .filter((user) => user.teamId == teamid)
@@ -38,15 +42,54 @@ export default function ViewTeam() {
       setIsOpen(true);
     }
   };
+
+  const handleLeave = () => {
+    
+    console.log(teamdata);
+    axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/leaveteam.php", {teamdata});
+  }
+
+  const handleJoin = () =>{
+    console.log(teamdata);
+    axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/leaveteam.php", {teamdata});
+  }
+
   const handleDelete = () => {
-    const teamdata = {
-      teamId: team.teamId,
-      teamAdmin: loggedInUser.userId
-    }
 
     console.log(teamdata);
     axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/delteam.php", {teamdata});
     //http://localhost/projects/php_project/PHP_sze/delteam.php
+  }
+
+  let button;
+
+  if(team.teamId == loggedInUser.teamId  && loggedInUser.isAdmin == true){
+    button = <button
+    onClick={handleDelete}
+    className="ui negative button"
+    style={{
+      marginRight: "0em",
+    }}>
+    Csapat törlése
+    </button>
+  }else if(team.teamId == loggedInUser.teamId && loggedInUser.isAdmin == false){
+    button = <button
+    onClick={handleLeave}
+    className="ui negative button"
+    style={{
+      marginRight: "0em",
+    }}>
+    Csapat elhagyása
+    </button>
+  }else if(loggedInUser.teamId == null){
+    button = <button
+    onClick={handleJoin}
+    className="ui negative button"
+    style={{
+      marginRight: "0em",
+    }}>
+    Csatlakozás
+    </button>
   }
 
   return (
@@ -140,14 +183,7 @@ export default function ViewTeam() {
             padding: "0em",
           }}
         >
-          <button
-            onClick={handleDelete}
-            className="ui negative button"
-            style={{
-              marginRight: "0em",
-            }}>
-            Csapat törlése
-          </button>
+          {button}
         </div>
       </div>
     </div>
