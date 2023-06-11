@@ -18,6 +18,7 @@ const NewMember = (props) => {
   const handleMemberName = (event) =>{
     setMemberName(event.target.value);
   }
+  let button;
 
   const handleInvite = (event) => {
     event.preventDefault();
@@ -30,16 +31,21 @@ const NewMember = (props) => {
     axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/invite.php", {invitedata})
   }
   if (props.isOpen === false) {
+    if(team.teamLimit==team.teamMembersCount){
+      button = <h2>A csapat megtelt!</h2>
+    } else {
+      button = <button
+      onClick={() => {
+        props.handleOpen();
+      }}
+      className="ui basic button icon"
+    >
+      <i className="large plus icon" />
+    </button>}
+      
     return (
       <div className="ui basic content center aligned segment">
-        <button
-          onClick={() => {
-            props.handleOpen();
-          }}
-          className="ui basic button icon"
-        >
-          <i className="large plus icon" />
-        </button>
+        {button}
       </div>
     );
   } else {

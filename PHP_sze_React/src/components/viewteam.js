@@ -145,8 +145,7 @@ export default function ViewTeam() {
             className="ui negative button"
             style={{
               marginRight: "0em",
-            }}
-          >
+            }}>
             Csapat törlése
           </button>
         </div>
