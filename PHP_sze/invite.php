@@ -16,6 +16,6 @@
             $inviteName = $inviteData['invitedata']['invitename'];
             $teamId = $inviteData['invitedata']['teamid'];
 
-            $team = new InviteContr($teamId, $inviteName);
-            $team->Invite();
+            $member = new InviteContr($teamId, $inviteName);
+            $member->Invite();
     }

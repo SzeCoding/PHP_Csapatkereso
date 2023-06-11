@@ -7,14 +7,14 @@
 
     include "classes/dbh.classes.php";
     include "classes/team.classes.php";
-    include "classes/kick-contr.classes.php";
+    include "classes/promote-contr.classes.php";
 
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
         case "POST":
-            $kickData = json_decode(file_get_contents('php://input'), true);
-            $kickName = $kickData['member'];
+            $promoteData = json_decode(file_get_contents('php://input'), true);
+            $promoteName= $promoteData['member'];
 
-            $member = new KickContr($kickName);
-            $member->kickUser();
+            $member = new PromoteContr($promoteName);
+            $member->Promote();
     }

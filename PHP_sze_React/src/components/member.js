@@ -8,13 +8,11 @@ const Member = (props) => {
   const handleKick = (event) =>{
     event.preventDefault();
 
-
     axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/kick.php", {member})
   }
 
   const handlePromote = (event) =>{
     event.preventDefault();
-    member = props.memberName;
 
     axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/promote.php", {member})
   }
