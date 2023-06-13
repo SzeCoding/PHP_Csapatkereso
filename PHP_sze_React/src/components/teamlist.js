@@ -7,11 +7,14 @@ import { useOutletContext, useParams, Outlet, Link } from "react-router-dom";
 import { DataContext } from "../context";
 
 export default function TeamList() {
+  useEffect(() => {
+    console.log("teamlist rendered");
+  });
   const dataContext = useContext(DataContext);
   const loggedInUser = dataContext.loggedInUser;
   const { courseid } = useParams();
   const [isOpen, setIsOpen] = useState({ isOpen: false });
-  const [handleTeamCreated] = useOutletContext();
+  const [handleDataUpdated] = useOutletContext();
 
   function handleClick() {
     if (isOpen) {
@@ -57,6 +60,7 @@ export default function TeamList() {
       }}
     >
       {displayTeams}
+
       {!dataContext.loggedInUser.teamId &&
         (isOpen ? (
           <div className="ui basic content center aligned segment">
@@ -68,7 +72,7 @@ export default function TeamList() {
           <NewTeam
             handleClick={handleClick}
             courseid={courseid}
-            handleTeamCreated={handleTeamCreated}
+            handleDataUpdated={handleDataUpdated}
           />
         ))}
     </div>

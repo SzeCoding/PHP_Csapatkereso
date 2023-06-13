@@ -12,11 +12,13 @@ export default function PageContainer() {
 
   useEffect(() => {
     getData();
+    console.log("uj data van");
   }, [teamsUpdated]);
 
   const getData = () => {
+    console.log("mukodik a getData");
     axios
-      .get("http://localhost/PHP_Csapatkereso/PHP_sze/fetch.php")//http://localhost/projects/php_project/PHP_sze/fetch.php
+      .get("http://localhost/projects/php_project/PHP_sze/fetch.php") //http://localhost/projects/php_project/PHP_sze/fetch.php
       .then(function (res) {
         dataContext.fetchData(res.data);
         const updatedUser = res.data.userData.find(
@@ -27,7 +29,7 @@ export default function PageContainer() {
       });
   };
 
-  const handleTeamCreated = () => {
+  const handleDataUpdated = () => {
     setTeamsUpdated(!teamsUpdated);
   };
 
@@ -48,7 +50,7 @@ export default function PageContainer() {
               <div className="ui basic content center aligned segment"></div>
             </div>
             <div className="row">
-              <Outlet context={[handleTeamCreated]} />
+              <Outlet context={[handleDataUpdated]} />
             </div>
           </div>
         </div>

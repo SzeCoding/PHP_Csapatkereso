@@ -25,12 +25,12 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/PHP_Csapatkereso/PHP_sze/login.php", inputs)//http://localhost/projects/php_project/PHP_sze/login.php
+      .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs) //http://localhost/projects/php_project/PHP_sze/login.php
       .then(function (res) {
         dataContext.login(res.data);
         //prefetch data if login is succesful
         axios
-          .get("http://localhost/PHP_Csapatkereso/PHP_sze/fetch.php")//http://localhost/projects/php_project/PHP_sze/fetch.php
+          .get("http://localhost/projects/php_project/PHP_sze/fetch.php") //http://localhost/projects/php_project/PHP_sze/fetch.php
           .then(function (res) {
             dataContext.fetchData(res.data);
             navigate("/csapatkereso");
@@ -45,7 +45,7 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/PHP_Csapatkereso/PHP_sze/signup.php", inputs)//http://localhost/projects/php_project/PHP_sze/signup.php
+      .post("http://localhost/projects/php_project/PHP_sze/signup.php", inputs) //http://localhost/projects/php_project/PHP_sze/signup.php
       .then(function (response) {
         setIsRegister(false);
       })

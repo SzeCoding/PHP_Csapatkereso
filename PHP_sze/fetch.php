@@ -18,6 +18,7 @@ switch($method){
                 "userData" => $fetch->getUserData()
             );
 
+            
             echo json_encode($response);
- 
-    }
+            
+        }

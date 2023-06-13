@@ -16,12 +16,20 @@ export default function ViewTeam(props) {
       teamName: teamname,
       teamLimit: teamlimit,
       teamCourse: props.courseid,
-      teamAdmin: loggedInUser.userId
+      teamAdmin: loggedInUser.userId,
     };
 
     axios
-      .post("http://localhost/PHP_Csapatkereso/PHP_sze/addteam.php", {teamdata}) //http://localhost/projects/php_project/PHP_sze/addteam.php
-      .then(props.handleClick(), props.handleTeamCreated());
+      .post("http://localhost/projects/php_project/PHP_sze/addteam.php", {
+        teamdata,
+      }) //http://localhost/projects/php_project/PHP_sze/addteam.php
+      .then(
+        console.log("addteam pressed and finished"),
+        props.handleClick(),
+        setTimeout(function () {
+          props.handleDataUpdated();
+        }, 100)
+      );
   };
 
   const handleTeamName = (event) => {

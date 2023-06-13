@@ -28,6 +28,8 @@ const DataProvider = ({ children }) => {
     setUsers(data.userData);
   };
 
+  console.log(teams);
+
   return (
     <DataContext.Provider
       value={{

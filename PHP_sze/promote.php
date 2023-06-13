@@ -13,7 +13,7 @@
     switch($method){
         case "POST":
             $promoteData = json_decode(file_get_contents('php://input'), true);
-            $promoteName= $promoteData['member'];
+            $promoteName= $promoteData['memberName'];
 
             $member = new PromoteContr($promoteName);
             $member->Promote();

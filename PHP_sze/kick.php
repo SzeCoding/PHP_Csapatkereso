@@ -13,7 +13,7 @@
     switch($method){
         case "POST":
             $kickData = json_decode(file_get_contents('php://input'), true);
-            $kickName = $kickData['member'];
+            $kickName = $kickData['memberName'];
 
             $member = new KickContr($kickName);
             $member->kickUser();

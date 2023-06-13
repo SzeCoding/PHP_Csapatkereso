@@ -1,20 +1,113 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
+import { DataContext } from "../context";
 
 const Member = (props) => {
-  
-  const member = props.memberName;
-  
-  const handleKick = (event) =>{
+  const dataContext = useContext(DataContext);
+  const memberName = props.member.userName;
+  console.log(props.member);
+  const handleKick = (event) => {
     event.preventDefault();
 
-    axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/kick.php", {member})
+    axios
+      .post("http://localhost/projects/php_project/PHP_sze/kick.php", {
+        memberName,
+      })
+      .then(
+        setTimeout(function () {
+          props.handleDataUpdated();
+        }, 100)
+      );
+  };
+
+  const handlePromote = (event) => {
+    event.preventDefault();
+
+    axios
+      .post("http://localhost/projects/php_project/PHP_sze/promote.php", {
+        memberName,
+      })
+      .then(
+        setTimeout(function () {
+          props.handleDataUpdated();
+        }, 100)
+      );
+  };
+  let userRender;
+
+  if (dataContext.loggedInUser.teamId == props.team.teamId) {
+    if (dataContext.loggedInUser.isAdmin == 1) {
+      userRender = (
+        <div className="ui  menu">
+          <div className="item">
+            <h2>{props.member.userName}</h2>
+          </div>
+          <div className="right menu">
+            <div className="link item" style={{ padding: "0" }}>
+              <button onClick={handlePromote}>
+                <i
+                  className=" big green angle double up icon"
+                  style={{ margin: "auto", marginTop: "30%" }}
+                ></i>
+              </button>
+            </div>
+            <div className="link item" style={{ padding: "0" }}>
+              <button onClick={handleKick}>
+                <i
+                  className=" big red trash alternate outline icon"
+                  style={{ margin: "auto", marginTop: "30%" }}
+                ></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      userRender = (
+        <div className="ui menu">
+          <div className="item">
+            <h2>{props.member.userName}</h2>
+          </div>
+        </div>
+      );
+    }
+  } else {
+    userRender = (
+      <div className="ui  menu">
+        <div className="item">
+          <h2>{props.member.userName}</h2>
+        </div>
+      </div>
+    );
   }
 
-  const handlePromote = (event) =>{
-    event.preventDefault();
+  if (dataContext.loggedInUser.userId == props.member.userId) {
+    userRender = (
+      <div className="ui menu">
+        <div className="item">
+          <h2>{props.member.userName} (te) </h2>
+        </div>
+      </div>
+    );
+  }
 
-    axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/promote.php", {member})
+  if (props.member.isAdmin == 1) {
+    userRender = (
+      <div className="ui menu">
+        <div className="item">
+          <h2>{props.member.userName} (admin) </h2>
+        </div>
+      </div>
+    );
+    if (dataContext.loggedInUser.userId == props.member.userId) {
+      userRender = (
+        <div className="ui menu">
+          <div className="item">
+            <h2>{props.member.userName} (te) (admin) </h2>
+          </div>
+        </div>
+      );
+    }
   }
 
   return (
@@ -27,29 +120,7 @@ const Member = (props) => {
         marginBottom: "0.25rem",
       }}
     >
-      <div className="ui  menu">
-        <div className="item">
-          <h2>{props.memberName}</h2>
-        </div>
-        <div className="right menu">
-          <div className="link item" style={{ padding: "0" }}>
-            <button onClick={handlePromote}>
-              <i
-                className=" big green angle double up icon"
-                style={{ margin: "auto", marginTop: "30%" }}
-              ></i>
-            </button>
-          </div>
-          <div className="link item" style={{ padding: "0" }}>
-            <button onClick={handleKick}>
-              <i
-                className=" big red trash alternate outline icon"
-                style={{ margin: "auto", marginTop: "30%" }}
-              ></i>
-            </button>
-          </div>
-        </div>
-      </div>
+      {userRender}
     </div>
   );
 };

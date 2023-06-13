@@ -15,9 +15,9 @@ const NewMember = (props) => {
   const { teamid } = useParams();
   const team = dataContext.teams.find((t) => t.teamId == teamid);
 
-  const handleMemberName = (event) =>{
+  const handleMemberName = (event) => {
     setMemberName(event.target.value);
-  }
+  };
   let invButton;
 
   const handleInvite = (event) => {
@@ -25,28 +25,37 @@ const NewMember = (props) => {
 
     const invitedata = {
       invitename: invitename,
-      teamid: team.teamId
-    } 
+      teamid: team.teamId,
+    };
 
-    axios.post("http://localhost/PHP_Csapatkereso/PHP_sze/invite.php", {invitedata})
-  }
+    axios
+      .post("http://localhost/projects/php_project/PHP_sze/invite.php", {
+        invitedata,
+      })
+      .then(
+        setTimeout(function () {
+          props.handleDataUpdated();
+        }, 100)
+      );
+  };
   if (props.isOpen === false) {
-    if(team.teamLimit==team.teamMembersCount){
-      invButton = <h2>A csapat megtelt!</h2>
+    if (team.teamLimit == team.teamMembersCount) {
+      invButton = <h2>A csapat megtelt!</h2>;
     } else {
-      invButton = <button
-      onClick={() => {
-        props.handleOpen();
-      }}
-      className="ui basic button icon"
-    >
-      <i className="large plus icon" />
-    </button>}
-      
+      invButton = (
+        <button
+          onClick={() => {
+            props.handleOpen();
+          }}
+          className="ui basic button icon"
+        >
+          <i className="large plus icon" />
+        </button>
+      );
+    }
+
     return (
-      <div className="ui basic content center aligned segment">
-        {invButton}
-      </div>
+      <div className="ui basic content center aligned segment">{invButton}</div>
     );
   } else {
     return (
@@ -67,7 +76,7 @@ const NewMember = (props) => {
                 type="text"
                 name="invitename"
                 placeholder="felhasználónév"
-                onChange = {handleMemberName}
+                onChange={handleMemberName}
                 required
               />
               <i className="users icon"></i>
@@ -75,7 +84,10 @@ const NewMember = (props) => {
           </div>
           <div className="right menu">
             <div className="link item" style={{ padding: "0" }}>
-              <button className="ui  inverted icon button" onClick={handleInvite}>
+              <button
+                className="ui  inverted icon button"
+                onClick={handleInvite}
+              >
                 <i
                   className="big green user plus icon"
                   style={{ margin: "auto", marginTop: "30%" }}
