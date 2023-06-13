@@ -32,7 +32,7 @@
                 exit();
             }
             $this->delUsers($this->userId);
-            $this->unsetAdmin($this->userId);
+            $this->unsetAdmins($this->teamId);
             $this->delTeam($this->teamId);
         }
     }
