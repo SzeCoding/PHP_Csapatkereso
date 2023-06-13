@@ -44,15 +44,15 @@ const Member = (props) => {
           </div>
           <div className="right menu">
             <div className="link item" style={{ padding: "0" }}>
-              <button onClick={handlePromote}>
+              <button className="ui icon button" onClick={handlePromote}>
                 <i
                   className=" big green angle double up icon"
-                  style={{ margin: "auto", marginTop: "30%" }}
+                  style={{ margin: "auto" }}
                 ></i>
               </button>
             </div>
             <div className="link item" style={{ padding: "0" }}>
-              <button onClick={handleKick}>
+              <button className="ui icon button" onClick={handleKick}>
                 <i
                   className=" big red trash alternate outline icon"
                   style={{ margin: "auto", marginTop: "30%" }}

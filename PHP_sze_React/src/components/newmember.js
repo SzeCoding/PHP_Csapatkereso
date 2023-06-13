@@ -68,7 +68,7 @@ const NewMember = (props) => {
           marginBottom: "0.25rem",
         }}
       >
-        <div className="ui  menu">
+        <div className="ui right menu">
           <div className="item">
             <div className="ui left icon input">
               <input

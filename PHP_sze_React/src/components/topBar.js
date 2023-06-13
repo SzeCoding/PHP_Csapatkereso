@@ -22,8 +22,12 @@ export default function TopBar(props) {
         <div className="right menu">
           <div className="item">{loggedInUser.userName}</div>
           <div className="item">
-            <button onClick={handleLogout} method="POST">
-              <a className="ui primary button">Kijelentkezés</a>
+            <button
+              className="ui primary button"
+              onClick={handleLogout}
+              method="POST"
+            >
+              Kijelentkezés
             </button>
           </div>
         </div>
