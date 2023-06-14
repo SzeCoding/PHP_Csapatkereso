@@ -10,7 +10,6 @@ import TeamList from "./components/teamlist";
 import ViewTeam from "./components/viewteam";
 import ProtectedRoutes from "./protectedroutes";
 import { DataProvider } from "./context";
-import ErrorBoundary from "./errorboundary";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,11 +27,11 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <ErrorBoundary>
+    
       <DataProvider>
         <RouterProvider router={router} />
       </DataProvider>
-    </ErrorBoundary>
+    
   );
 }
 

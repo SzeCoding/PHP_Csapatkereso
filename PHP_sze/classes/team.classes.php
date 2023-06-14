@@ -1,7 +1,7 @@
 <?php
     class Team extends Dbh{
 
-        public function setTeam($courseId, $teamName, $teamLimit){
+        protected function setTeam($courseId, $teamName, $teamLimit){
             $stmt = $this->connect()->prepare('INSERT INTO team (courseId, teamName, teamLimit)  VALUES(?,?,?);');
 
             if(!$stmt->execute(array($courseId, $teamName, $teamLimit))){
@@ -11,7 +11,7 @@
             $stmt = null;
         }
 
-        public function setAdmin($userId){
+        protected function setAdmin($userId){
             $stmt = $this->connect()->prepare('UPDATE users SET isAdmin = 1 WHERE userId = ?;');
 
             if(!$stmt->execute(array($userId))){
@@ -21,7 +21,7 @@
             $stmt = null;
         }
 
-        public function getUserId($userName){
+        protected function getUserId($userName){
             $stmt = $this->connect()->prepare('SELECT userId FROM users WHERE userName = ?');
             
             if(!$stmt->execute(array($userName))){
@@ -35,7 +35,7 @@
             $stmt = null;
         }
 
-        public function getTeamId($teamName, $courseId){
+        protected function getTeamId($teamName, $courseId){
             $stmt = $this->connect()->prepare('SELECT teamId FROM team WHERE teamName = ? AND courseId = ?');
             
             if(!$stmt->execute(array($teamName, $courseId))){
@@ -48,7 +48,7 @@
             $stmt = null;
         }
 
-        public function updateTeam($teamId, $userId){
+        protected function updateTeam($teamId, $userId){
             $stmt = $this->connect()->prepare('UPDATE users SET teamId = ? WHERE userId = ?;');
 
             if(!$stmt->execute(array($teamId, $userId))){
@@ -58,7 +58,7 @@
             $stmt = null;
         }
 
-        public function checkAdmin($userId){
+        protected function checkAdmin($userId){
             $stmt = $this->connect()->prepare('SELECT isAdmin FROM users WHERE userId = ?;');
 
             if(!$stmt->execute(array($userId))){
@@ -77,7 +77,7 @@
             $stmt = null;
         }
 
-        public function checkTeam($teamName){
+        protected function checkTeam($teamName){
             $stmt = $this->connect()->prepare('SELECT teamName FROM team WHERE teamName =?;');
 
             if(!$stmt->execute(array($teamName))){
@@ -91,7 +91,7 @@
             return $resultCheck;
         }
 
-        public function checkUser($userName){
+        protected function checkUser($userName){
             $stmt = $this->connect()->prepare('SELECT userName FROM users WHERE userName =?;');
 
             if(!$stmt->execute(array($userName))){
@@ -105,7 +105,7 @@
             return $resultCheck;
         }
 
-        public function delTeam($teamId){
+        protected function delTeam($teamId){
             $stmt = $this->connect()->prepare('DELETE FROM team WHERE teamId = ?;');
 
             if(!$stmt->execute(array($teamId))){
@@ -114,7 +114,7 @@
             }
         }
 
-        public function delUsers($teamId){
+        protected function delUsers($teamId){
             $stmt = $this->connect()->prepare('UPDATE users SET teamId = NULL, isAdmin = 0 WHERE teamId = ?;');
 
             if (!$stmt->execute(array($teamId))){
@@ -123,7 +123,7 @@
             }
         }
 
-        public function unsetAdmins($teamId){
+        protected function unsetAdmins($teamId){
             $stmt = $this->connect()->prepare('UPDATE users SET isAdmin = 0 WHERE teamId = ?;');
 
             if (!$stmt->execute(array($teamId))){
@@ -132,7 +132,7 @@
             }
         }
 
-        public function isMember($userId, $teamId){
+        protected function isMember($userId, $teamId){
             $stmt = $this->connect()->prepare('SELECT teamId FROM users WHERE userId = ?;');
 
             if (!$stmt->execute(array($userId))){

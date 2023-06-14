@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import TopBar from "./topBar";
 import SideBar from "./sidebar";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet} from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import { DataContext } from "../context";

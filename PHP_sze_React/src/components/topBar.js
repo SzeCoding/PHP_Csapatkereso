@@ -2,11 +2,13 @@ import React, { useContext } from "react";
 import axios from "axios";
 import { DataContext } from "../context";
 import { useNavigate } from "react-router-dom";
+import {useAuth} from "../protectedroutes"
 
 export default function TopBar(props) {
   const dataContext = useContext(DataContext);
   const loggedInUser = dataContext.loggedInUser;
   const navigate = useNavigate();
+  const auth = useAuth();
 
   const handleLogout = () => {
     axios
@@ -14,6 +16,7 @@ export default function TopBar(props) {
       .then((response) => {
         navigate("/login");
         dataContext.logout();
+        auth.logout;
       });
   };
 

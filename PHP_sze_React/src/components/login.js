@@ -47,7 +47,7 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/signup.php", inputs) //http://localhost/projects/php_project/PHP_sze/signup.php
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/signup.php", inputs) //http://localhost/projects/php_project/PHP_sze/signup.php
       .then(function (res) {
         setIsRegister(false);
       })
