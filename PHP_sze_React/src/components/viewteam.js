@@ -47,7 +47,7 @@ export default function ViewTeam() {
 
   const handleLeave = () => {
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/leaveteam.php", {
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/leaveteam.php", {
         teamdata,
       })
       .then(
@@ -59,7 +59,7 @@ export default function ViewTeam() {
 
   const handleJoin = () => {
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/jointeam.php", {
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/jointeam.php", {
         teamdata,
       })
       .then(
@@ -71,7 +71,7 @@ export default function ViewTeam() {
 
   const handleDelete = () => {
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/delteam.php", {
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/delteam.php", {
         teamdata,
       })
       .then(

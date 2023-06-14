@@ -123,10 +123,10 @@
             }
         }
 
-        public function unsetAdmin($userId){
-            $stmt = $this->connect()->prepare('UPDATE users SET isAdmin = 0 WHERE userId = ?;');
+        public function unsetAdmins($teamId){
+            $stmt = $this->connect()->prepare('UPDATE users SET isAdmin = 0 WHERE teamId = ?;');
 
-            if (!$stmt->execute(array($userId))){
+            if (!$stmt->execute(array($teamId))){
                 $stmt = null;
                 exit();
             }

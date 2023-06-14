@@ -27,11 +27,11 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs) //http://localhost/projects/php_project/PHP_sze/login.php
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/login.php", inputs) //http://localhost/projects/php_project/PHP_sze/login.php
       .then(function (res) {
         dataContext.login(res.data);
         axios
-          .get("http://localhost/projects/php_project/PHP_sze/fetch.php") //http://localhost/projects/php_project/PHP_sze/fetch.php
+          .get("http://localhost/PHP_Csapatkereso/PHP_sze/fetch.php") //http://localhost/projects/php_project/PHP_sze/fetch.php
           .then(function (res) {
             dataContext.fetchData(res.data);
             auth.login();

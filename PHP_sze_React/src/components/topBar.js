@@ -10,7 +10,7 @@ export default function TopBar(props) {
 
   const handleLogout = () => {
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/logout.php") // http://localhost/projects/php_project/PHP_sze/fetch.php
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/logout.php") // http://localhost/projects/php_project/PHP_sze/fetch.php
       .then((response) => {
         navigate("/login");
         dataContext.logout();

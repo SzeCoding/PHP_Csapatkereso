@@ -29,7 +29,7 @@ const NewMember = (props) => {
     };
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/invite.php", {
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/invite.php", {
         invitedata,
       })
       .then(

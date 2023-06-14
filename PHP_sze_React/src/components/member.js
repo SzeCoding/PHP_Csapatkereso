@@ -9,7 +9,7 @@ const Member = (props) => {
     event.preventDefault();
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/kick.php", {
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/kick.php", {
         memberName,
       })
       .then(
@@ -23,7 +23,7 @@ const Member = (props) => {
     event.preventDefault();
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/promote.php", {
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/promote.php", {
         memberName,
       })
       .then(
