@@ -1,12 +1,22 @@
+import { useState } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 
-const useAuth = () => {
-  const user = { loggedIn: true };
-  return user.loggedIn;
+export const useAuth = () => {
+  const [userLoggedIn, setUserLoggedIn] = useState(true);
+
+  function login() {
+    setUserLoggedIn(true);
+  }
+
+  const logout = () => {
+    setUserLoggedIn(false);
+  };
+
+  return { userLoggedIn, login, logout };
 };
 
 export default function ProtectedRoutes() {
-  const isAuth = useAuth();
+  const { userLoggedIn } = useAuth();
 
-  return isAuth ? <Outlet /> : <Navigate to="/login" />;
+  return userLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 }

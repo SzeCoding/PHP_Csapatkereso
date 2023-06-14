@@ -13,7 +13,6 @@ export default function ViewTeam() {
   const loggedInUser = dataContext.loggedInUser;
   const [handleDataUpdated] = useOutletContext();
 
-  console.log(handleDataUpdated);
   const { teamid } = useParams();
   const team = dataContext.teams.find((t) => t.teamId == teamid);
   const teamdata = {
@@ -47,7 +46,6 @@ export default function ViewTeam() {
   };
 
   const handleLeave = () => {
-    console.log(teamdata);
     axios
       .post("http://localhost/projects/php_project/PHP_sze/leaveteam.php", {
         teamdata,
@@ -60,7 +58,6 @@ export default function ViewTeam() {
   };
 
   const handleJoin = () => {
-    console.log(teamdata);
     axios
       .post("http://localhost/projects/php_project/PHP_sze/jointeam.php", {
         teamdata,
@@ -73,7 +70,6 @@ export default function ViewTeam() {
   };
 
   const handleDelete = () => {
-    console.log(teamdata);
     axios
       .post("http://localhost/projects/php_project/PHP_sze/delteam.php", {
         teamdata,

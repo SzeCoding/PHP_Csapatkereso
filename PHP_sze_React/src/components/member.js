@@ -5,7 +5,6 @@ import { DataContext } from "../context";
 const Member = (props) => {
   const dataContext = useContext(DataContext);
   const memberName = props.member.userName;
-  console.log(props.member);
   const handleKick = (event) => {
     event.preventDefault();
 

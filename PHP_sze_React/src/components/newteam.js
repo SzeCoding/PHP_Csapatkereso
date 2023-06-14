@@ -24,7 +24,6 @@ export default function ViewTeam(props) {
         teamdata,
       }) //http://localhost/projects/php_project/PHP_sze/addteam.php
       .then(
-        console.log("addteam pressed and finished"),
         props.handleClick(),
         setTimeout(function () {
           props.handleDataUpdated();

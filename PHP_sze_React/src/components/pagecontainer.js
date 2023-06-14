@@ -12,11 +12,9 @@ export default function PageContainer() {
 
   useEffect(() => {
     getData();
-    console.log("uj data van");
   }, [teamsUpdated]);
 
   const getData = () => {
-    console.log("mukodik a getData");
     axios
       .get("http://localhost/projects/php_project/PHP_sze/fetch.php") //http://localhost/projects/php_project/PHP_sze/fetch.php
       .then(function (res) {

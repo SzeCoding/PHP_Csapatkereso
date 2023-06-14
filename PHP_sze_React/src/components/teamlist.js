@@ -7,9 +7,6 @@ import { useOutletContext, useParams, Outlet, Link } from "react-router-dom";
 import { DataContext } from "../context";
 
 export default function TeamList() {
-  useEffect(() => {
-    console.log("teamlist rendered");
-  });
   const dataContext = useContext(DataContext);
   const loggedInUser = dataContext.loggedInUser;
   const { courseid } = useParams();

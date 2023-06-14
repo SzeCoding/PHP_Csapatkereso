@@ -1,22 +1,26 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
 
-  const userUpdate = (userData) => {
-    setLoggedInUser(userData);
-    console.log(userData);
-  };
-
   const login = (userData) => {
     setLoggedInUser(userData);
+    localStorage.setItem("loggedInUser", JSON.stringify(userData));
   };
 
   const logout = () => {
     setLoggedInUser(null);
+    localStorage.removeItem("loggedInUser");
   };
+
+  useEffect(() => {
+    const localLoggedInUser = localStorage.getItem("loggedInUser");
+    if (!localLoggedInUser) {
+      setLoggedInUser(JSON.parse(localLoggedInUser));
+    }
+  }, []);
 
   const [courses, setCourses] = useState({});
   const [teams, setTeams] = useState({});
@@ -28,7 +32,9 @@ const DataProvider = ({ children }) => {
     setUsers(data.userData);
   };
 
-  console.log(teams);
+  const userUpdate = (userData) => {
+    setLoggedInUser(userData);
+  };
 
   return (
     <DataContext.Provider

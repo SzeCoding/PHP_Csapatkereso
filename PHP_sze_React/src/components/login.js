@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { DataContext } from "../context";
 import "../styles/login.css";
+import { useAuth } from "../protectedroutes";
 
 export default function Login() {
   const dataContext = useContext(DataContext);
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
+  const auth = useAuth();
 
   const handleRegisterClick = () => {
     setIsRegister(true);
@@ -28,11 +30,11 @@ export default function Login() {
       .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs) //http://localhost/projects/php_project/PHP_sze/login.php
       .then(function (res) {
         dataContext.login(res.data);
-        //prefetch data if login is succesful
         axios
           .get("http://localhost/projects/php_project/PHP_sze/fetch.php") //http://localhost/projects/php_project/PHP_sze/fetch.php
           .then(function (res) {
             dataContext.fetchData(res.data);
+            auth.login();
             navigate("/csapatkereso");
           });
       })
@@ -46,7 +48,7 @@ export default function Login() {
 
     axios
       .post("http://localhost/projects/php_project/PHP_sze/signup.php", inputs) //http://localhost/projects/php_project/PHP_sze/signup.php
-      .then(function (response) {
+      .then(function (res) {
         setIsRegister(false);
       })
       .catch(function (error) {

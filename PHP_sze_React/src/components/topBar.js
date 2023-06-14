@@ -1,16 +1,18 @@
 import React, { useContext } from "react";
 import axios from "axios";
 import { DataContext } from "../context";
+import { useNavigate } from "react-router-dom";
 
 export default function TopBar(props) {
   const dataContext = useContext(DataContext);
   const loggedInUser = dataContext.loggedInUser;
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     axios
       .post("http://localhost/projects/php_project/PHP_sze/logout.php") // http://localhost/projects/php_project/PHP_sze/fetch.php
       .then((response) => {
-        window.location.href = "http://localhost:3000/login";
+        navigate("/login");
         dataContext.logout();
       });
   };
