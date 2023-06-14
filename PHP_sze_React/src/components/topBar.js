@@ -16,7 +16,7 @@ export default function TopBar(props) {
       .then((response) => {
         navigate("/login");
         dataContext.logout();
-        auth.logout;
+        auth.logout();
       });
   };
 

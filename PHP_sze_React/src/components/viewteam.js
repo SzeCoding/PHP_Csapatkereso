@@ -112,7 +112,7 @@ export default function ViewTeam() {
         Csapat elhagyása
       </button>
     );
-  } else if (loggedInUser.teamId == null) {
+  } else if (loggedInUser.teamId == null && team.teamLimit != team.teamMembersCount){
     button = (
       <button
         onClick={handleJoin}
