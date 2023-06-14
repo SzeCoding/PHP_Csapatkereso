@@ -1,29 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { DataContext } from "../context";
 
-export default class SideBar extends React.Component {
-  render() {
-    const courses = this.props.courses.map((course) => (
-      <NavLink
-        className="item"
-        to={"/csapatkereso/" + course.courseID}
-        key={course.courseID}
-      >
-        {course.courseName}
-      </NavLink>
-    ));
-    return (
-      <div
-        className="ui vertical pointing menu"
-        style={{
-          //border: "1px solid red",
-          height: "80vh",
-          width: "100%",
-        }}
-      >
-        <h2 className="header item">Kurzusok</h2>
-        {courses}
-      </div>
-    );
-  }
+export default function SideBar() {
+  const dataContext = useContext(DataContext);
+
+  const courses = dataContext.courses.map((course) => (
+    <NavLink
+      className="item"
+      to={"/csapatkereso/" + course.courseId}
+      key={course.courseId}
+    >
+      {course.courseName}
+    </NavLink>
+  ));
+
+  return (
+    <div
+      className="ui vertical pointing menu"
+      style={{
+        height: "80vh",
+        width: "100%",
+      }}
+    >
+      <h2 className="header item">Kurzusok</h2>
+      {courses}
+    </div>
+  );
 }

@@ -2,24 +2,34 @@
 
 class Login extends Dbh{
 
-
-
-
-
     protected function getUser($username, $pass){
         $stmt = $this->connect()->prepare('SELECT * FROM users WHERE userName = ?;');
 
 
         if(!$stmt->execute(array($username))){
             $stmt = null;
-            #header(location login page)
+            http_response_code(400);
+            $response = array(
+                'error' => true,
+                'message' => "Statement failed"
+            );
+            echo "Statement failed";
+            $jsonResponse = json_encode($response);
+            header("Content-Type: application/json");
             exit();
         }
 
 
         if ($stmt->rowCount() == 0){
             $stmt = null;
-            #header(location login page)
+            http_response_code(404);
+            $response = array(
+                'error' => true,
+                'message' => "User not found in database"
+            );
+            echo "User not found in database";
+            $jsonResponse = json_encode($response);
+            header("Content-Type: application/json");
             exit();
         }
 
@@ -29,7 +39,14 @@ class Login extends Dbh{
         
         if ($checkPass == false){
             $stmt = null;
-            #header(location login page)
+            http_response_code(401);
+            $response = array(
+                'error' => true,
+                'message' => "Wrong password"
+            );
+            echo "Wrong password";
+            $jsonResponse = json_encode($response);
+            header("Content-Type: application/json");
             exit();
         }
         else if($checkPass == true){
@@ -55,9 +72,8 @@ class Login extends Dbh{
         session_start();
         $_SESSION["userId"] = $user[0]["userId"];
         $_SESSION["username"] = $user[0]["userName"];
-        $_SESSION["pass"] = $user[0]["userPass"];
-        $_SESSION["teamId"] = $user[0]["teamId"];
         $_SESSION["isAdmin"] = $user[0]["isAdmin"];
+        $_SESSION["teamId"] = $user[0]["teamId"];
 
         
 

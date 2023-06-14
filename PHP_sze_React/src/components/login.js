@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import ProtectedRoutes from "../protectedroutes";
-
+import { DataContext } from "../context";
 import "../styles/login.css";
-import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
+import { useAuth } from "../protectedroutes";
 
 export default function Login() {
+  const dataContext = useContext(DataContext);
+  const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
-  const [shouldNavigate, setShouldNavigate] = useState(false);
+  const auth = useAuth();
 
   const handleRegisterClick = () => {
     setIsRegister(true);
@@ -26,37 +27,36 @@ export default function Login() {
     event.preventDefault();
 
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/login.php", inputs)
-      .then(function (response) {
-        console.log(response);
-        setShouldNavigate(true);
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/login.php", inputs) //http://localhost/projects/php_project/PHP_sze/login.php
+      .then(function (res) {
+        dataContext.login(res.data);
+        axios
+          .get("http://localhost/PHP_Csapatkereso/PHP_sze/fetch.php") //http://localhost/projects/php_project/PHP_sze/fetch.php
+          .then(function (res) {
+            dataContext.fetchData(res.data);
+            auth.login();
+            navigate("/csapatkereso");
+          });
       })
       .catch(function (error) {
         console.log(error.message);
-        setShouldNavigate(false);
       });
   };
 
   const handleSignup = (event) => {
     event.preventDefault();
 
-    console.log(inputs);
-
     axios
-      .post("http://localhost/projects/php_project/PHP_sze/signup.php", inputs)
-      .then(function (response) {
-        console.log(response);
-        setShouldNavigate(true);
+      .post("http://localhost/projects/php_project/PHP_sze/signup.php", inputs) //http://localhost/projects/php_project/PHP_sze/signup.php
+      .then(function (res) {
+        setIsRegister(false);
       })
       .catch(function (error) {
         console.log(error.message);
-        setShouldNavigate(false);
       });
   };
 
-  return shouldNavigate ? (
-    <Navigate to="/csapatkereso" />
-  ) : !isRegister ? (
+  return !isRegister ? (
     <div className="login-container">
       <h2 className="ui dividing header">Jelentkezz be!</h2>
       <form className="ui form" onSubmit={handleLogin} method="post">

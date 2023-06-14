@@ -1,6 +1,4 @@
 <?php
-
-
     
 class SignupContr extends Signup{
     private $username;
@@ -20,18 +18,39 @@ class SignupContr extends Signup{
         }
 
         if($this->invalidUsername() == false ){
-            #header("location = login page")
-            exit();
+            http_response_code(403);
+                $response = array(
+                    'error' => true,
+                    'message' => "Username contains bad characters"
+                );
+                echo "Username contains bad characters";
+                $jsonResponse = json_encode($response);
+                header("Content-Type: application/json");
+                exit();
         }
 
         if($this->passMatch() == false ){
-            #header("location = login page")
+            http_response_code(403);
+            $response = array(
+                'error' => true,
+                'message' => "Passwords don't match"
+            );
+            echo "Passwords don't match";
+            $jsonResponse = json_encode($response);
+            header("Content-Type: application/json");
             exit();
         }
 
         if($this->usernameTaken() == false ){
-            #header("location = login page")
-            exit();
+            http_response_code(403);
+                $response = array(
+                    'error' => true,
+                    'message' => "Username already exists"
+                );
+                echo "Username already exists";
+                $jsonResponse = json_encode($response);
+                header("Content-Type: application/json");
+                exit();
         }
         
         $this->setUser($this->username, $this->pass);
@@ -71,5 +90,5 @@ class SignupContr extends Signup{
     }
 
 
-
+    
 }

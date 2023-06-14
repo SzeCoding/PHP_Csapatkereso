@@ -1,29 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
+import axios from "axios";
 import Member from "./member";
 import NewMember from "./newmember";
-import {
-  Navigate,
-  useNavigate,
-  useOutletContext,
-  useParams,
-} from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { useState } from "react";
+import { DataContext } from "../context";
 
 export default function ViewTeam() {
   const [isOpen, setIsOpen] = useState(false);
-  const { course } = useOutletContext();
-  const { reRender } = useOutletContext();
   const { courseid } = useParams();
+  const dataContext = useContext(DataContext);
+  const loggedInUser = dataContext.loggedInUser;
+  const [handleDataUpdated] = useOutletContext();
+
   const { teamid } = useParams();
-  const team = course.teams.find((t) => t.teamID === teamid);
-  const members = team.members.map((member) => (
-    <Member memberName={member.memberName} key={member.memberID} />
-  ));
+  const team = dataContext.teams.find((t) => t.teamId == teamid);
+  const teamdata = {
+    teamId: team.teamId,
+    teamAdmin: loggedInUser.userId,
+    teamUsername: loggedInUser.userName,
+  };
+
+  const members = dataContext.users
+    .filter((user) => user.teamId == teamid)
+    .map((member) => (
+      <Member
+        member={member}
+        key={member.userId}
+        handleDataUpdated={handleDataUpdated}
+        team={team}
+      />
+    ));
   const navigate = useNavigate();
 
   const handleClose = () => {
     navigate("/csapatkereso/" + courseid);
-    reRender();
   };
 
   const handleOpen = () => {
@@ -33,6 +44,87 @@ export default function ViewTeam() {
       setIsOpen(true);
     }
   };
+
+  const handleLeave = () => {
+    axios
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/leaveteam.php", {
+        teamdata,
+      })
+      .then(
+        setTimeout(function () {
+          handleDataUpdated();
+        }, 100)
+      );
+  };
+
+  const handleJoin = () => {
+    axios
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/jointeam.php", {
+        teamdata,
+      })
+      .then(
+        setTimeout(function () {
+          handleDataUpdated();
+        }, 100)
+      );
+  };
+
+  const handleDelete = () => {
+    axios
+      .post("http://localhost/PHP_Csapatkereso/PHP_sze/delteam.php", {
+        teamdata,
+      })
+      .then(
+        navigate("/csapatkereso/" + courseid),
+        setTimeout(function () {
+          handleDataUpdated();
+        }, 100)
+      );
+    //http://localhost/projects/php_project/PHP_sze/delteam.php
+  };
+
+  let button;
+
+  if (team.teamId == loggedInUser.teamId && loggedInUser.isAdmin == true) {
+    button = (
+      <button
+        onClick={handleDelete}
+        className="ui negative button"
+        style={{
+          marginRight: "0em",
+        }}
+      >
+        Csapat törlése
+      </button>
+    );
+  } else if (
+    team.teamId == loggedInUser.teamId &&
+    (loggedInUser.isAdmin == null || loggedInUser.isAdmin == false)
+  ) {
+    button = (
+      <button
+        onClick={handleLeave}
+        className="ui negative button"
+        style={{
+          marginRight: "0em",
+        }}
+      >
+        Csapat elhagyása
+      </button>
+    );
+  } else if (loggedInUser.teamId == null) {
+    button = (
+      <button
+        onClick={handleJoin}
+        className="ui primary  button"
+        style={{
+          marginRight: "0em",
+        }}
+      >
+        Csatlakozás
+      </button>
+    );
+  }
 
   return (
     <div
@@ -79,11 +171,19 @@ export default function ViewTeam() {
                 boxShadow: "none",
               }}
             >
-              5/4
+              {team.teamLimit} / {team.teamMembersCount}
             </h2>
           </div>
           {members}
-          <NewMember handleOpen={handleOpen} isOpen={isOpen} />
+          {dataContext.loggedInUser.isAdmin == 1 ? (
+            <NewMember
+              handleOpen={handleOpen}
+              isOpen={isOpen}
+              handleDataUpdated={handleDataUpdated}
+            />
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
       <div className=" one wide column" style={{ boxShadow: "none" }}></div>
@@ -125,14 +225,7 @@ export default function ViewTeam() {
             padding: "0em",
           }}
         >
-          <button
-            className="ui negative button"
-            style={{
-              marginRight: "0em",
-            }}
-          >
-            Csapat törlése
-          </button>
+          {button}
         </div>
       </div>
     </div>
